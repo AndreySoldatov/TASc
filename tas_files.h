@@ -6,6 +6,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+/**
+ * Read whole file to the ASCII String
+*/
 Str fileReadToStr(char const * path) {
     FILE *fp = fopen(path, "r");
     if(fp == NULL) {
@@ -28,15 +31,24 @@ Str fileReadToStr(char const * path) {
 
 typedef unsigned char Byte;
 
+/**
+ * Struct for holding an array of bytes
+*/
 typedef struct ByteBuffer {
     Byte * data;
     size_t length;
 } ByteBuffer;
 
+/**
+ * Function for deleting byte buffers you MUST call it explicitly for every ByteBuffer object
+*/
 void byteBufferDelete(ByteBuffer *b) {
     free(b->data);
 }
 
+/**
+ * Read whole file to the ByteBuffer object (unsigned char *)
+*/
 ByteBuffer fileReadByteBuffer(char const * path) {
     FILE *fp = fopen(path, "rb");
     if(fp == NULL) {
@@ -55,6 +67,9 @@ ByteBuffer fileReadByteBuffer(char const * path) {
     return res;
 }
 
+/**
+ * Write C-String to the file. Overrides the previous contents of file. And creates file if nessesary
+*/
 void fileWriteCStr(char const *path, char const *str) {
     FILE *fp = fopen(path, "w+");
     if(fp == NULL) {
@@ -64,6 +79,9 @@ void fileWriteCStr(char const *path, char const *str) {
     fclose(fp);
 }
 
+/**
+ * Appends C-String to the end of file.
+*/
 void fileAppendCStr(char const *path, char const *str) {
     FILE *fp = fopen(path, "a+");
     if(fp == NULL) {
@@ -73,14 +91,23 @@ void fileAppendCStr(char const *path, char const *str) {
     fclose(fp);
 }
 
+/**
+ * Write String to the file. Overrides the previous contents of file. And creates file if nessesary
+*/
 void fileWriteStr(char const *path, Str str) {
     fileWriteCStr(path, str.data);
 }
 
+/**
+ * Appends String to the end of file.
+*/
 void fileAppendStr(char const *path, Str str) {
     fileAppendCStr(path, str.data);
 }
 
+/**
+ * Writes ByteBuffer to file. Overrides previos file content. And creates file if nessesary
+*/
 void fileWriteByteBuffer(char const *path, ByteBuffer b) {
     FILE *fp = fopen(path, "wb+");
     if(fp == NULL) {
@@ -90,6 +117,9 @@ void fileWriteByteBuffer(char const *path, ByteBuffer b) {
     fclose(fp);
 }
 
+/**
+ * Appends ByteBuffer to the end of the file
+*/
 void fileAppendByteBuffer(char const *path, ByteBuffer b) {
     FILE *fp = fopen(path, "ab+");
     if(fp == NULL) {
@@ -99,6 +129,9 @@ void fileAppendByteBuffer(char const *path, ByteBuffer b) {
     fclose(fp);
 }
 
+/**
+ * Returns String containing extension of the file without the dot
+*/
 Str fileExtension(Str str) {
     if(strFindLastOf(str, '.', 0) != STR_BAD_INDEX) {
         return strSub(str, strFindLastOf(str, '.', 0) + 1, str.length);
@@ -107,6 +140,10 @@ Str fileExtension(Str str) {
     }
 }
 
+/**
+ * Returns String containing path to the path's parent directory
+ * WARNING: Doesn't work with relative path 
+*/
 Str fileParentDir(Str str) {
     if(strFindLastOf(str, '/', 0) != STR_BAD_INDEX) {
         return strSub(str, 0, strFindLastOf(str, '/', 0) + 1);
@@ -115,6 +152,9 @@ Str fileParentDir(Str str) {
     }
 }
 
+/**
+ * Returns String containg file name and extension from path.
+*/
 Str fileName(Str str) {
     if(strFindLastOf(str, '/', 0) != STR_BAD_INDEX) {
         return strSub(str, strFindLastOf(str, '/', 0) + 1, str.length);
@@ -123,6 +163,10 @@ Str fileName(Str str) {
     }
 }
 
+/**
+ * Returns file permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 size_t filePermissionsCStr(char const * path) {
     struct stat stats;
     if(stat(path, &stats) < 0) {
@@ -131,24 +175,42 @@ size_t filePermissionsCStr(char const * path) {
     return stats.st_mode;
 }
 
+/**
+ * Returns file permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 size_t filePermissions(Str str) {
     return filePermissionsCStr(str.data);
 }
 
+/**
+ * Overrides file permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 void fileSetPermissionsCStr(char const * path, size_t permissions) {
     if(chmod(path, permissions) != 0) {
         error_exit("fileSetPermissionsCStr error: Cannot assign permission to selected file\n");
     }
 }
 
+/**
+ * Overrides file permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 void fileSetPermissions(Str str, size_t permissions) {
     fileSetPermissionsCStr(str.data, permissions);
 }
 
+/**
+ * Checks if file exists
+*/
 bool fileExisitsCStr(char const * path) {
     return access(path, F_OK) == 0;
 }
 
+/**
+ * Checks if file exists
+*/
 bool fileExisits(Str path) {
     return access(path.data, F_OK) == 0;
 }

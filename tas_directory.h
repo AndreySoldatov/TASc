@@ -7,6 +7,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+/**
+ * Enumerates all the directory's children in StrVec.
+ * Return value is a FULL PATH
+*/
 StrVec dirListContent(char const * path) {
     StrVec res;
     res.data = NULL;
@@ -38,6 +42,10 @@ StrVec dirListContent(char const * path) {
     return res;
 }
 
+/**
+ * Get directory Permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 size_t dirPermissionsCStr(char const * path) {
     struct stat stats;
     if(stat(path, &stats) < 0) {
@@ -46,24 +54,42 @@ size_t dirPermissionsCStr(char const * path) {
     return stats.st_mode;
 }
 
+/**
+ * Get directory Permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 size_t dirPermissions(Str str) {
     return dirPermissionsCStr(str.data);
 }
 
+/**
+ * Set directory Permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 void dirSetPermissionsCStr(char const * path, size_t permissions) {
     if(chmod(path, permissions) != 0) {
         error_exit("fileSetPermissionsCStr error: Cannot assign permission to selected file\n");
     }
 }
 
+/**
+ * Set directory Permissions in mode_t format
+ * https://man7.org/linux/man-pages/man2/lstat.2.html
+*/
 void dirSetPermissions(Str str, size_t permissions) {
     dirSetPermissionsCStr(str.data, permissions);
 }
 
+/**
+ * Check if directory exists
+*/
 bool dirExisitsCStr(char const * path) {
     return access(path, F_OK) == 0;
 }
 
+/**
+ * Check if directory exists
+*/
 bool dirExisits(Str path) {
     return access(path.data, F_OK) == 0;
 }
