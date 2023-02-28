@@ -1,6 +1,16 @@
 #ifndef TAS_FILES
 #define TAS_FILES
 
+/**
+ * @file tas_files.h
+ * @brief This File provides basic file manipulation functions
+ * @version 0.1
+ * @date 2023-02-28
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #include "tas_string.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -9,7 +19,7 @@
 /**
  * Read whole file to the ASCII String
 */
-Str fileReadToStr(char const * path) {
+Str fileReadToStr(char const *path) {
     FILE *fp = fopen(path, "r");
     if(fp == NULL) {
         error_exit("fileReadToStr error: cannot open file\n")
@@ -35,7 +45,7 @@ typedef unsigned char Byte;
  * Struct for holding an array of bytes
 */
 typedef struct ByteBuffer {
-    Byte * data;
+    Byte *data;
     size_t length;
 } ByteBuffer;
 
@@ -49,7 +59,7 @@ void byteBufferDelete(ByteBuffer *b) {
 /**
  * Read whole file to the ByteBuffer object (unsigned char *)
 */
-ByteBuffer fileReadByteBuffer(char const * path) {
+ByteBuffer fileReadByteBuffer(char const *path) {
     FILE *fp = fopen(path, "rb");
     if(fp == NULL) {
         error_exit("fileWriteStr error: cannot open file\n")
@@ -167,7 +177,7 @@ Str fileName(Str str) {
  * Returns file permissions in mode_t format
  * https://man7.org/linux/man-pages/man2/lstat.2.html
 */
-size_t filePermissionsCStr(char const * path) {
+size_t filePermissionsCStr(char const *path) {
     struct stat stats;
     if(stat(path, &stats) < 0) {
         error_exit("filePermissions error: Cannot read file properties\n");
@@ -187,7 +197,7 @@ size_t filePermissions(Str str) {
  * Overrides file permissions in mode_t format
  * https://man7.org/linux/man-pages/man2/lstat.2.html
 */
-void fileSetPermissionsCStr(char const * path, size_t permissions) {
+void fileSetPermissionsCStr(char const *path, size_t permissions) {
     if(chmod(path, permissions) != 0) {
         error_exit("fileSetPermissionsCStr error: Cannot assign permission to selected file\n");
     }
@@ -204,7 +214,7 @@ void fileSetPermissions(Str str, size_t permissions) {
 /**
  * Checks if file exists
 */
-bool fileExisitsCStr(char const * path) {
+bool fileExisitsCStr(char const *path) {
     return access(path, F_OK) == 0;
 }
 

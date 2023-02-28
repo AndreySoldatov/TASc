@@ -1,0 +1,380 @@
+\hypertarget{tas__string_8h}{}\doxysection{tas\+\_\+string.\+h File Reference}
+\label{tas__string_8h}\index{tas\_string.h@{tas\_string.h}}
+
+
+This file provides a \mbox{\hyperlink{structStr}{Str}} data type for dynamically allocated string and some basic manipulation with it.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for tas\+\_\+string.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tas__string_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{tas__string_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structStr}{Str}}
+\begin{DoxyCompactList}\small\item\em String data type. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structStrVec}{Str\+Vec}}
+\begin{DoxyCompactList}\small\item\em String vector data type; TODO\+: Impliment basic vector manipulation Use raw contents for now. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{tas__string_8h_a3a6b987f353975b2f9743ec6cdff9ba3}{error\+\_\+exit}}(msg)~printf(msg); exit(1);
+\begin{DoxyCompactList}\small\item\em terminates the program and displays error message used in some functions as error handling mechanism \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{tas__string_8h_a3999ef3913c1035d6bb7d4d6c5c9a51b}{STR\+\_\+\+BAD\+\_\+\+INDEX}}~-\/1
+\begin{DoxyCompactList}\small\item\em macro that is used if searching functions failed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__string_8h_a839ac354acf276a655aea420f6133406}{Str}}
+\begin{DoxyCompactList}\small\item\em String data type. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{tas__string_8h_aa8cdef0b445f51eea90deee8c46e2059}{Str\+Vec}}
+\begin{DoxyCompactList}\small\item\em String vector data type; TODO\+: Impliment basic vector manipulation Use raw contents for now. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__string_8h_a050953037b446029cdeb2d88271f81f6}{str\+New}} (char const $\ast$source)
+\begin{DoxyCompactList}\small\item\em Create new str from source (const char $\ast$) Example\+: \mbox{\hyperlink{structStr}{Str}} str = str\+New(\char`\"{}\+Hello World\char`\"{}); After creating str MUST be explicitly deleted\+: str\+Delete(str);. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__string_8h_a00ab13a80933d71c2479284c5eabd9ff}{str\+Delete}} (\mbox{\hyperlink{structStr}{Str}} $\ast$str)
+\begin{DoxyCompactList}\small\item\em This function needs to be called after creating and using a string to avoid memory leaks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__string_8h_a23ce4817b6d85c35c20c064fa45c0b4d}{str\+Print}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em put string\textquotesingle{}s content to the standard output \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{tas__string_8h_a36a9a315744086b7bc18f94831f1d847}{str\+Data}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em return constant pointer to the string data (const char $\ast$) \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{tas__string_8h_a9125460bb9009c828c31492fac97cb25}{str\+Mut\+Data}} (\mbox{\hyperlink{structStr}{Str}} $\ast$str)
+\begin{DoxyCompactList}\small\item\em return mutable pointer to the string data (char $\ast$) \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{tas__string_8h_adb0c3653a570287b1c096d5586dd78e5}{str\+Length}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em return length of string \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} $\ast$ \mbox{\hyperlink{tas__string_8h_a2fb5946e4a9f799fd62c983d40dec9f7}{str\+Push}} (\mbox{\hyperlink{structStr}{Str}} $\ast$str, char c)
+\begin{DoxyCompactList}\small\item\em Push one character to the back of the string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} $\ast$ \mbox{\hyperlink{tas__string_8h_a072910974eca7902b88c00751d0457b6}{str\+Append\+CStr}} (\mbox{\hyperlink{structStr}{Str}} $\ast$dest, char const $\ast$source)
+\begin{DoxyCompactList}\small\item\em Push C-\/style string to the end of destination string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} $\ast$ \mbox{\hyperlink{tas__string_8h_ae0e743ae0895d33b9cf766f0c4cac4b5}{str\+Append}} (\mbox{\hyperlink{structStr}{Str}} $\ast$dest, \mbox{\hyperlink{structStr}{Str}} source)
+\begin{DoxyCompactList}\small\item\em Appent one string to the back of another. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__string_8h_aaa791c5198c6207c26008ba5c9eb9b7d}{str\+Sub}} (\mbox{\hyperlink{structStr}{Str}} str, size\+\_\+t first, size\+\_\+t last)
+\item 
+\mbox{\hyperlink{structStr}{Str}} $\ast$ \mbox{\hyperlink{tas__string_8h_aa112f7c93108b4a28251cdb212cad3f3}{str\+Insert}} (\mbox{\hyperlink{structStr}{Str}} $\ast$dest, \mbox{\hyperlink{structStr}{Str}} source, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Insert string to the {\itshape index} of another string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} $\ast$ \mbox{\hyperlink{tas__string_8h_ac4e2300c9ef95120df27d9cb79a51449}{str\+Insert\+CStr}} (\mbox{\hyperlink{structStr}{Str}} $\ast$dest, char const $\ast$source, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Insert C-\/string to the {\itshape index} of another string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__string_8h_adf953d138dfe91ac54f18cce382834f7}{str\+Compare}} (\mbox{\hyperlink{structStr}{Str}} str1, \mbox{\hyperlink{structStr}{Str}} str2)
+\begin{DoxyCompactList}\small\item\em Compare two strings for equality. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__string_8h_ab28dd45c6b10049b2b048cf490c1a9c6}{str\+Compare\+CStr}} (\mbox{\hyperlink{structStr}{Str}} str1, char const $\ast$str2)
+\begin{DoxyCompactList}\small\item\em Compare string and C-\/\+String for equality. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__string_8h_a13366a2ba5c461ed2af523c102ce2022}{str\+Ends\+With}} (\mbox{\hyperlink{structStr}{Str}} str1, \mbox{\hyperlink{structStr}{Str}} str2)
+\item 
+bool \mbox{\hyperlink{tas__string_8h_a221670af804bb3c956877b466e4f9ae1}{str\+Ends\+With\+CStr}} (\mbox{\hyperlink{structStr}{Str}} str1, char const $\ast$str2)
+\item 
+bool \mbox{\hyperlink{tas__string_8h_a5485ccfae871070ca090724a991c13fe}{str\+Starts\+With}} (\mbox{\hyperlink{structStr}{Str}} str1, \mbox{\hyperlink{structStr}{Str}} str2)
+\item 
+bool \mbox{\hyperlink{tas__string_8h_a5611633db040d9cebf298a5576f5e16b}{str\+Starts\+With\+CStr}} (\mbox{\hyperlink{structStr}{Str}} str1, char const $\ast$str2)
+\item 
+char \mbox{\hyperlink{tas__string_8h_ad0e7ad6816a5d3333e6a69cee21cfaf3}{str\+At}} (\mbox{\hyperlink{structStr}{Str}} str, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Get immutable string element at index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__string_8h_aa6ca60fe52ff66f1459455c01d3e037e}{str\+Set}} (\mbox{\hyperlink{structStr}{Str}} $\ast$str, size\+\_\+t index, char c)
+\begin{DoxyCompactList}\small\item\em Set string element at index. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{tas__string_8h_ac3074b3241f7c4c8b25830efb4792dc4}{str\+Find\+Firs\+Of}} (\mbox{\hyperlink{structStr}{Str}} str, char c, size\+\_\+t start)
+\begin{DoxyCompactList}\small\item\em Find the first occurence of char in string. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{tas__string_8h_a3d757063983a7493032a7386cb51750a}{str\+Find\+Last\+Of}} (\mbox{\hyperlink{structStr}{Str}} str, char c, size\+\_\+t start)
+\begin{DoxyCompactList}\small\item\em Find the last occurence of char in string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__string_8h_af70802fb0d897a12a9dd4a7eb584ee5d}{str\+Vec\+Delete}} (\mbox{\hyperlink{structStrVec}{Str\+Vec}} $\ast$vec)
+\begin{DoxyCompactList}\small\item\em Use this function to clear \mbox{\hyperlink{structStrVec}{Str\+Vec}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{tas__string_8h_a7886f5eb3dd9ce238a9e1b557879d7d4}{str\+Split}} (\mbox{\hyperlink{structStr}{Str}} str, char del)
+\begin{DoxyCompactList}\small\item\em Split string using delimiter and return result as \mbox{\hyperlink{structStrVec}{Str\+Vec}} The source string remains untouched WARNING\+: Copying. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file provides a \mbox{\hyperlink{structStr}{Str}} data type for dynamically allocated string and some basic manipulation with it. 
+
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/02-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{tas__string_8h_a3a6b987f353975b2f9743ec6cdff9ba3}\label{tas__string_8h_a3a6b987f353975b2f9743ec6cdff9ba3}} 
+\index{tas\_string.h@{tas\_string.h}!error\_exit@{error\_exit}}
+\index{error\_exit@{error\_exit}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{error\_exit}{error\_exit}}
+{\footnotesize\ttfamily \#define error\+\_\+exit(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~printf(msg); exit(1);}
+
+
+
+terminates the program and displays error message used in some functions as error handling mechanism 
+
+\mbox{\Hypertarget{tas__string_8h_a3999ef3913c1035d6bb7d4d6c5c9a51b}\label{tas__string_8h_a3999ef3913c1035d6bb7d4d6c5c9a51b}} 
+\index{tas\_string.h@{tas\_string.h}!STR\_BAD\_INDEX@{STR\_BAD\_INDEX}}
+\index{STR\_BAD\_INDEX@{STR\_BAD\_INDEX}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{STR\_BAD\_INDEX}{STR\_BAD\_INDEX}}
+{\footnotesize\ttfamily \#define STR\+\_\+\+BAD\+\_\+\+INDEX~-\/1}
+
+
+
+macro that is used if searching functions failed 
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{tas__string_8h_a839ac354acf276a655aea420f6133406}\label{tas__string_8h_a839ac354acf276a655aea420f6133406}} 
+\index{tas\_string.h@{tas\_string.h}!Str@{Str}}
+\index{Str@{Str}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{Str}{Str}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{structStr}{Str}}}
+
+
+
+String data type. 
+
+\mbox{\Hypertarget{tas__string_8h_aa8cdef0b445f51eea90deee8c46e2059}\label{tas__string_8h_aa8cdef0b445f51eea90deee8c46e2059}} 
+\index{tas\_string.h@{tas\_string.h}!StrVec@{StrVec}}
+\index{StrVec@{StrVec}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{StrVec}{StrVec}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{structStrVec}{Str\+Vec}}}
+
+
+
+String vector data type; TODO\+: Impliment basic vector manipulation Use raw contents for now. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tas__string_8h_ae0e743ae0895d33b9cf766f0c4cac4b5}\label{tas__string_8h_ae0e743ae0895d33b9cf766f0c4cac4b5}} 
+\index{tas\_string.h@{tas\_string.h}!strAppend@{strAppend}}
+\index{strAppend@{strAppend}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strAppend()}{strAppend()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}}$\ast$ str\+Append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{dest,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{source }\end{DoxyParamCaption})}
+
+
+
+Appent one string to the back of another. 
+
+\mbox{\Hypertarget{tas__string_8h_a072910974eca7902b88c00751d0457b6}\label{tas__string_8h_a072910974eca7902b88c00751d0457b6}} 
+\index{tas\_string.h@{tas\_string.h}!strAppendCStr@{strAppendCStr}}
+\index{strAppendCStr@{strAppendCStr}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strAppendCStr()}{strAppendCStr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}}$\ast$ str\+Append\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{dest,  }\item[{char const $\ast$}]{source }\end{DoxyParamCaption})}
+
+
+
+Push C-\/style string to the end of destination string. 
+
+\mbox{\Hypertarget{tas__string_8h_ad0e7ad6816a5d3333e6a69cee21cfaf3}\label{tas__string_8h_ad0e7ad6816a5d3333e6a69cee21cfaf3}} 
+\index{tas\_string.h@{tas\_string.h}!strAt@{strAt}}
+\index{strAt@{strAt}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strAt()}{strAt()}}
+{\footnotesize\ttfamily char str\+At (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Get immutable string element at index. 
+
+\mbox{\Hypertarget{tas__string_8h_adf953d138dfe91ac54f18cce382834f7}\label{tas__string_8h_adf953d138dfe91ac54f18cce382834f7}} 
+\index{tas\_string.h@{tas\_string.h}!strCompare@{strCompare}}
+\index{strCompare@{strCompare}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strCompare()}{strCompare()}}
+{\footnotesize\ttfamily bool str\+Compare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{str2 }\end{DoxyParamCaption})}
+
+
+
+Compare two strings for equality. 
+
+\mbox{\Hypertarget{tas__string_8h_ab28dd45c6b10049b2b048cf490c1a9c6}\label{tas__string_8h_ab28dd45c6b10049b2b048cf490c1a9c6}} 
+\index{tas\_string.h@{tas\_string.h}!strCompareCStr@{strCompareCStr}}
+\index{strCompareCStr@{strCompareCStr}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strCompareCStr()}{strCompareCStr()}}
+{\footnotesize\ttfamily bool str\+Compare\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{char const $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+
+
+Compare string and C-\/\+String for equality. 
+
+\mbox{\Hypertarget{tas__string_8h_a36a9a315744086b7bc18f94831f1d847}\label{tas__string_8h_a36a9a315744086b7bc18f94831f1d847}} 
+\index{tas\_string.h@{tas\_string.h}!strData@{strData}}
+\index{strData@{strData}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strData()}{strData()}}
+{\footnotesize\ttfamily const char$\ast$ str\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+return constant pointer to the string data (const char $\ast$) 
+
+\mbox{\Hypertarget{tas__string_8h_a00ab13a80933d71c2479284c5eabd9ff}\label{tas__string_8h_a00ab13a80933d71c2479284c5eabd9ff}} 
+\index{tas\_string.h@{tas\_string.h}!strDelete@{strDelete}}
+\index{strDelete@{strDelete}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strDelete()}{strDelete()}}
+{\footnotesize\ttfamily void str\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+
+This function needs to be called after creating and using a string to avoid memory leaks. 
+
+\mbox{\Hypertarget{tas__string_8h_a13366a2ba5c461ed2af523c102ce2022}\label{tas__string_8h_a13366a2ba5c461ed2af523c102ce2022}} 
+\index{tas\_string.h@{tas\_string.h}!strEndsWith@{strEndsWith}}
+\index{strEndsWith@{strEndsWith}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strEndsWith()}{strEndsWith()}}
+{\footnotesize\ttfamily bool str\+Ends\+With (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{str2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tas__string_8h_a221670af804bb3c956877b466e4f9ae1}\label{tas__string_8h_a221670af804bb3c956877b466e4f9ae1}} 
+\index{tas\_string.h@{tas\_string.h}!strEndsWithCStr@{strEndsWithCStr}}
+\index{strEndsWithCStr@{strEndsWithCStr}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strEndsWithCStr()}{strEndsWithCStr()}}
+{\footnotesize\ttfamily bool str\+Ends\+With\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{char const $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tas__string_8h_ac3074b3241f7c4c8b25830efb4792dc4}\label{tas__string_8h_ac3074b3241f7c4c8b25830efb4792dc4}} 
+\index{tas\_string.h@{tas\_string.h}!strFindFirsOf@{strFindFirsOf}}
+\index{strFindFirsOf@{strFindFirsOf}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strFindFirsOf()}{strFindFirsOf()}}
+{\footnotesize\ttfamily size\+\_\+t str\+Find\+Firs\+Of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{char}]{c,  }\item[{size\+\_\+t}]{start }\end{DoxyParamCaption})}
+
+
+
+Find the first occurence of char in string. 
+
+\mbox{\Hypertarget{tas__string_8h_a3d757063983a7493032a7386cb51750a}\label{tas__string_8h_a3d757063983a7493032a7386cb51750a}} 
+\index{tas\_string.h@{tas\_string.h}!strFindLastOf@{strFindLastOf}}
+\index{strFindLastOf@{strFindLastOf}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strFindLastOf()}{strFindLastOf()}}
+{\footnotesize\ttfamily size\+\_\+t str\+Find\+Last\+Of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{char}]{c,  }\item[{size\+\_\+t}]{start }\end{DoxyParamCaption})}
+
+
+
+Find the last occurence of char in string. 
+
+\mbox{\Hypertarget{tas__string_8h_aa112f7c93108b4a28251cdb212cad3f3}\label{tas__string_8h_aa112f7c93108b4a28251cdb212cad3f3}} 
+\index{tas\_string.h@{tas\_string.h}!strInsert@{strInsert}}
+\index{strInsert@{strInsert}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strInsert()}{strInsert()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}}$\ast$ str\+Insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{dest,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{source,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Insert string to the {\itshape index} of another string. 
+
+\mbox{\Hypertarget{tas__string_8h_ac4e2300c9ef95120df27d9cb79a51449}\label{tas__string_8h_ac4e2300c9ef95120df27d9cb79a51449}} 
+\index{tas\_string.h@{tas\_string.h}!strInsertCStr@{strInsertCStr}}
+\index{strInsertCStr@{strInsertCStr}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strInsertCStr()}{strInsertCStr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}}$\ast$ str\+Insert\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{dest,  }\item[{char const $\ast$}]{source,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Insert C-\/string to the {\itshape index} of another string. 
+
+\mbox{\Hypertarget{tas__string_8h_adb0c3653a570287b1c096d5586dd78e5}\label{tas__string_8h_adb0c3653a570287b1c096d5586dd78e5}} 
+\index{tas\_string.h@{tas\_string.h}!strLength@{strLength}}
+\index{strLength@{strLength}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strLength()}{strLength()}}
+{\footnotesize\ttfamily size\+\_\+t str\+Length (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+return length of string 
+
+\mbox{\Hypertarget{tas__string_8h_a9125460bb9009c828c31492fac97cb25}\label{tas__string_8h_a9125460bb9009c828c31492fac97cb25}} 
+\index{tas\_string.h@{tas\_string.h}!strMutData@{strMutData}}
+\index{strMutData@{strMutData}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strMutData()}{strMutData()}}
+{\footnotesize\ttfamily char$\ast$ str\+Mut\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+
+return mutable pointer to the string data (char $\ast$) 
+
+\mbox{\Hypertarget{tas__string_8h_a050953037b446029cdeb2d88271f81f6}\label{tas__string_8h_a050953037b446029cdeb2d88271f81f6}} 
+\index{tas\_string.h@{tas\_string.h}!strNew@{strNew}}
+\index{strNew@{strNew}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strNew()}{strNew()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}} str\+New (\begin{DoxyParamCaption}\item[{char const $\ast$}]{source }\end{DoxyParamCaption})}
+
+
+
+Create new str from source (const char $\ast$) Example\+: \mbox{\hyperlink{structStr}{Str}} str = str\+New(\char`\"{}\+Hello World\char`\"{}); After creating str MUST be explicitly deleted\+: str\+Delete(str);. 
+
+\mbox{\Hypertarget{tas__string_8h_a23ce4817b6d85c35c20c064fa45c0b4d}\label{tas__string_8h_a23ce4817b6d85c35c20c064fa45c0b4d}} 
+\index{tas\_string.h@{tas\_string.h}!strPrint@{strPrint}}
+\index{strPrint@{strPrint}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strPrint()}{strPrint()}}
+{\footnotesize\ttfamily void str\+Print (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+put string\textquotesingle{}s content to the standard output 
+
+\mbox{\Hypertarget{tas__string_8h_a2fb5946e4a9f799fd62c983d40dec9f7}\label{tas__string_8h_a2fb5946e4a9f799fd62c983d40dec9f7}} 
+\index{tas\_string.h@{tas\_string.h}!strPush@{strPush}}
+\index{strPush@{strPush}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strPush()}{strPush()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}}$\ast$ str\+Push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{str,  }\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Push one character to the back of the string. 
+
+\mbox{\Hypertarget{tas__string_8h_aa6ca60fe52ff66f1459455c01d3e037e}\label{tas__string_8h_aa6ca60fe52ff66f1459455c01d3e037e}} 
+\index{tas\_string.h@{tas\_string.h}!strSet@{strSet}}
+\index{strSet@{strSet}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strSet()}{strSet()}}
+{\footnotesize\ttfamily void str\+Set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}} $\ast$}]{str,  }\item[{size\+\_\+t}]{index,  }\item[{char}]{c }\end{DoxyParamCaption})}
+
+
+
+Set string element at index. 
+
+\mbox{\Hypertarget{tas__string_8h_a7886f5eb3dd9ce238a9e1b557879d7d4}\label{tas__string_8h_a7886f5eb3dd9ce238a9e1b557879d7d4}} 
+\index{tas\_string.h@{tas\_string.h}!strSplit@{strSplit}}
+\index{strSplit@{strSplit}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strSplit()}{strSplit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStrVec}{Str\+Vec}} str\+Split (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{char}]{del }\end{DoxyParamCaption})}
+
+
+
+Split string using delimiter and return result as \mbox{\hyperlink{structStrVec}{Str\+Vec}} The source string remains untouched WARNING\+: Copying. 
+
+If your string is big enough this can be a problem \mbox{\Hypertarget{tas__string_8h_a5485ccfae871070ca090724a991c13fe}\label{tas__string_8h_a5485ccfae871070ca090724a991c13fe}} 
+\index{tas\_string.h@{tas\_string.h}!strStartsWith@{strStartsWith}}
+\index{strStartsWith@{strStartsWith}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strStartsWith()}{strStartsWith()}}
+{\footnotesize\ttfamily bool str\+Starts\+With (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{str2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tas__string_8h_a5611633db040d9cebf298a5576f5e16b}\label{tas__string_8h_a5611633db040d9cebf298a5576f5e16b}} 
+\index{tas\_string.h@{tas\_string.h}!strStartsWithCStr@{strStartsWithCStr}}
+\index{strStartsWithCStr@{strStartsWithCStr}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strStartsWithCStr()}{strStartsWithCStr()}}
+{\footnotesize\ttfamily bool str\+Starts\+With\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{char const $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tas__string_8h_aaa791c5198c6207c26008ba5c9eb9b7d}\label{tas__string_8h_aaa791c5198c6207c26008ba5c9eb9b7d}} 
+\index{tas\_string.h@{tas\_string.h}!strSub@{strSub}}
+\index{strSub@{strSub}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strSub()}{strSub()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}} str\+Sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{size\+\_\+t}]{first,  }\item[{size\+\_\+t}]{last }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tas__string_8h_af70802fb0d897a12a9dd4a7eb584ee5d}\label{tas__string_8h_af70802fb0d897a12a9dd4a7eb584ee5d}} 
+\index{tas\_string.h@{tas\_string.h}!strVecDelete@{strVecDelete}}
+\index{strVecDelete@{strVecDelete}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strVecDelete()}{strVecDelete()}}
+{\footnotesize\ttfamily void str\+Vec\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStrVec}{Str\+Vec}} $\ast$}]{vec }\end{DoxyParamCaption})}
+
+
+
+Use this function to clear \mbox{\hyperlink{structStrVec}{Str\+Vec}}. 
+

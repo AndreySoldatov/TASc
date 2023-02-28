@@ -1,0 +1,4 @@
+<map id="StrVec" name="StrVec">
+<area shape="rect" id="node1" title="String vector data type; TODO: Impliment basic vector manipulation Use raw contents for now." alt="" coords="5,95,68,121"/>
+<area shape="rect" id="node2" href="$structStr.html" title="String data type." alt="" coords="17,5,57,32"/>
+</map>

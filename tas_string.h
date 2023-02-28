@@ -1,9 +1,27 @@
 #ifndef TAS_STRING
 #define TAS_STRING
 
+/**
+ * @brief terminates the program and displays error message
+ * used in some functions as error handling mechanism
+ * 
+ */
 #define error_exit(msg) printf(msg); exit(1);
 
+/**
+ * @brief macro that is used if searching functions failed
+*/
 #define STR_BAD_INDEX -1
+
+/**
+ * @file tas_string.h
+ * @brief This file provides a Str data type for dynamically allocated string and some basic manipulation with it
+ * @version 0.1
+ * @date 2023-02-28
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 
 #include <stdlib.h>
 #include <string.h>

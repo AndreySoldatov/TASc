@@ -1,0 +1,118 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+Include dependency graph for main.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classByteBufferHasher}{Byte\+Buffer\+Hasher}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}{DEBUG}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{main_8cpp_a5df5518b488228d9937501d80f7b70e2}{Byte}} = uint8\+\_\+t
+\item 
+using \mbox{\hyperlink{main_8cpp_ad992e13db74fd509f31f2be09677ef09}{Byte\+Buffer}} = std\+::vector$<$ \mbox{\hyperlink{main_8cpp_a5df5518b488228d9937501d80f7b70e2}{Byte}} $>$
+\item 
+using \mbox{\hyperlink{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}{Byte\+Dict}} = std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, \mbox{\hyperlink{classByteBufferHasher}{Byte\+Buffer\+Hasher}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \mbox{\hyperlink{main_8cpp_a6eaed4c1472fec2f712d8dccdbf03713}{operator$<$$<$}} (std\+::ostream \&os, \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&b)
+\item 
+std\+::ostream \& \mbox{\hyperlink{main_8cpp_a15521f8ee322316f7e3921634ad2c4b7}{operator$<$$<$}} (std\+::ostream \&os, std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, size\+\_\+t, \mbox{\hyperlink{classByteBufferHasher}{Byte\+Buffer\+Hasher}} $>$ const \&b)
+\item 
+std\+::ostream \& \mbox{\hyperlink{main_8cpp_aef24cef6337c6104cc81a345e0f26836}{operator$<$$<$}} (std\+::ostream \&os, std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, size\+\_\+t $>$$>$ const \&b)
+\item 
+std\+::tuple$<$ \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, \mbox{\hyperlink{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}{Byte\+Dict}}, \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} $>$ \mbox{\hyperlink{main_8cpp_a6cd15847e38a8e7cd10d695c2d1232db}{encode}} (\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&b, size\+\_\+t buffer\+Length)
+\item 
+\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} \mbox{\hyperlink{main_8cpp_a8c3da081188928887741d700717772a9}{decode}} (\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&b, \mbox{\hyperlink{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}{Byte\+Dict}} const \&d, \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&tail=\{\})
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}\label{main_8cpp_ad72dbcf6d0153db1b8d8a58001feed83}} 
+\index{main.cpp@{main.cpp}!DEBUG@{DEBUG}}
+\index{DEBUG@{DEBUG}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{DEBUG}{DEBUG}}
+{\footnotesize\ttfamily \#define DEBUG}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{main_8cpp_a5df5518b488228d9937501d80f7b70e2}\label{main_8cpp_a5df5518b488228d9937501d80f7b70e2}} 
+\index{main.cpp@{main.cpp}!Byte@{Byte}}
+\index{Byte@{Byte}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{Byte}{Byte}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{main_8cpp_a5df5518b488228d9937501d80f7b70e2}{Byte}} =  uint8\+\_\+t}
+
+\mbox{\Hypertarget{main_8cpp_ad992e13db74fd509f31f2be09677ef09}\label{main_8cpp_ad992e13db74fd509f31f2be09677ef09}} 
+\index{main.cpp@{main.cpp}!ByteBuffer@{ByteBuffer}}
+\index{ByteBuffer@{ByteBuffer}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{ByteBuffer}{ByteBuffer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} =  std\+::vector$<$\mbox{\hyperlink{main_8cpp_a5df5518b488228d9937501d80f7b70e2}{Byte}}$>$}
+
+\mbox{\Hypertarget{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}\label{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}} 
+\index{main.cpp@{main.cpp}!ByteDict@{ByteDict}}
+\index{ByteDict@{ByteDict}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{ByteDict}{ByteDict}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}{Byte\+Dict}} =  std\+::unordered\+\_\+map$<$\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, \mbox{\hyperlink{classByteBufferHasher}{Byte\+Buffer\+Hasher}}$>$}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a8c3da081188928887741d700717772a9}\label{main_8cpp_a8c3da081188928887741d700717772a9}} 
+\index{main.cpp@{main.cpp}!decode@{decode}}
+\index{decode@{decode}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{decode()}{decode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} decode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&}]{b,  }\item[{\mbox{\hyperlink{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}{Byte\+Dict}} const \&}]{d,  }\item[{\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&}]{tail = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a6cd15847e38a8e7cd10d695c2d1232db}\label{main_8cpp_a6cd15847e38a8e7cd10d695c2d1232db}} 
+\index{main.cpp@{main.cpp}!encode@{encode}}
+\index{encode@{encode}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily std\+::tuple$<$\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, \mbox{\hyperlink{main_8cpp_a3e4b351b064aff5e0ea0c45e1e3bf15d}{Byte\+Dict}}, \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}$>$ encode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&}]{b,  }\item[{size\+\_\+t}]{buffer\+Length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a6eaed4c1472fec2f712d8dccdbf03713}\label{main_8cpp_a6eaed4c1472fec2f712d8dccdbf03713}} 
+\index{main.cpp@{main.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} const \&}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a15521f8ee322316f7e3921634ad2c4b7}\label{main_8cpp_a15521f8ee322316f7e3921634ad2c4b7}} 
+\index{main.cpp@{main.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, size\+\_\+t, \mbox{\hyperlink{classByteBufferHasher}{Byte\+Buffer\+Hasher}} $>$ const \&}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_aef24cef6337c6104cc81a345e0f26836}\label{main_8cpp_aef24cef6337c6104cc81a345e0f26836}} 
+\index{main.cpp@{main.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}, size\+\_\+t $>$$>$ const \&}]{b }\end{DoxyParamCaption})}
+

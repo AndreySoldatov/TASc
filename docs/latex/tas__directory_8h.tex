@@ -1,0 +1,135 @@
+\hypertarget{tas__directory_8h}{}\doxysection{tas\+\_\+directory.\+h File Reference}
+\label{tas__directory_8h}\index{tas\_directory.h@{tas\_directory.h}}
+
+
+This file provides basic directory manipulation functionality.  
+
+
+{\ttfamily \#include \char`\"{}tas\+\_\+string.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for tas\+\_\+directory.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tas__directory_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{tas__directory_8h_a168c17eff94831e4b22518fd4dda2297}{dir\+List\+Content\+CStr}} (char const $\ast$path)
+\begin{DoxyCompactList}\small\item\em Enumerates all the directory\textquotesingle{}s children in \mbox{\hyperlink{structStrVec}{Str\+Vec}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{tas__directory_8h_a1fb12b769c6f29e823da5136c0ecede0}{dir\+List\+Content}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em Enumerates all the directory\textquotesingle{}s children in \mbox{\hyperlink{structStrVec}{Str\+Vec}}. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{tas__directory_8h_a2482a88c45d96c03b967b943bc8deb9d}{dir\+Permissions\+CStr}} (char const $\ast$path)
+\begin{DoxyCompactList}\small\item\em Get directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}{dir\+Permissions}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em Get directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__directory_8h_a6f49bc8ed4a3343394fc5fafce2c080d}{dir\+Set\+Permissions\+CStr}} (char const $\ast$path, size\+\_\+t permissions)
+\begin{DoxyCompactList}\small\item\em Set directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__directory_8h_a1499da2d64c649a5f71373093412be5f}{dir\+Set\+Permissions}} (\mbox{\hyperlink{structStr}{Str}} str, size\+\_\+t permissions)
+\begin{DoxyCompactList}\small\item\em Set directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__directory_8h_a238bc244d8a93584622f853b772d9c1e}{dir\+Exisits\+CStr}} (char const $\ast$path)
+\begin{DoxyCompactList}\small\item\em Check if directory exists. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__directory_8h_aaaf44381fe3bcaec0e293910ade6ff08}{dir\+Exisits}} (\mbox{\hyperlink{structStr}{Str}} path)
+\begin{DoxyCompactList}\small\item\em Check if directory exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file provides basic directory manipulation functionality. 
+
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/02-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tas__directory_8h_aaaf44381fe3bcaec0e293910ade6ff08}\label{tas__directory_8h_aaaf44381fe3bcaec0e293910ade6ff08}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirExisits@{dirExisits}}
+\index{dirExisits@{dirExisits}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirExisits()}{dirExisits()}}
+{\footnotesize\ttfamily bool dir\+Exisits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{path }\end{DoxyParamCaption})}
+
+
+
+Check if directory exists. 
+
+\mbox{\Hypertarget{tas__directory_8h_a238bc244d8a93584622f853b772d9c1e}\label{tas__directory_8h_a238bc244d8a93584622f853b772d9c1e}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirExisitsCStr@{dirExisitsCStr}}
+\index{dirExisitsCStr@{dirExisitsCStr}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirExisitsCStr()}{dirExisitsCStr()}}
+{\footnotesize\ttfamily bool dir\+Exisits\+CStr (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Check if directory exists. 
+
+\mbox{\Hypertarget{tas__directory_8h_a1fb12b769c6f29e823da5136c0ecede0}\label{tas__directory_8h_a1fb12b769c6f29e823da5136c0ecede0}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirListContent@{dirListContent}}
+\index{dirListContent@{dirListContent}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirListContent()}{dirListContent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStrVec}{Str\+Vec}} dir\+List\+Content (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+Enumerates all the directory\textquotesingle{}s children in \mbox{\hyperlink{structStrVec}{Str\+Vec}}. 
+
+Return value is a FULL PATH \mbox{\Hypertarget{tas__directory_8h_a168c17eff94831e4b22518fd4dda2297}\label{tas__directory_8h_a168c17eff94831e4b22518fd4dda2297}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirListContentCStr@{dirListContentCStr}}
+\index{dirListContentCStr@{dirListContentCStr}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirListContentCStr()}{dirListContentCStr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStrVec}{Str\+Vec}} dir\+List\+Content\+CStr (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Enumerates all the directory\textquotesingle{}s children in \mbox{\hyperlink{structStrVec}{Str\+Vec}}. 
+
+Return value is a FULL PATH \mbox{\Hypertarget{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}\label{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirPermissions@{dirPermissions}}
+\index{dirPermissions@{dirPermissions}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirPermissions()}{dirPermissions()}}
+{\footnotesize\ttfamily size\+\_\+t dir\+Permissions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+Get directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. 
+
+\mbox{\Hypertarget{tas__directory_8h_a2482a88c45d96c03b967b943bc8deb9d}\label{tas__directory_8h_a2482a88c45d96c03b967b943bc8deb9d}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirPermissionsCStr@{dirPermissionsCStr}}
+\index{dirPermissionsCStr@{dirPermissionsCStr}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirPermissionsCStr()}{dirPermissionsCStr()}}
+{\footnotesize\ttfamily size\+\_\+t dir\+Permissions\+CStr (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Get directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. 
+
+\mbox{\Hypertarget{tas__directory_8h_a1499da2d64c649a5f71373093412be5f}\label{tas__directory_8h_a1499da2d64c649a5f71373093412be5f}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirSetPermissions@{dirSetPermissions}}
+\index{dirSetPermissions@{dirSetPermissions}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirSetPermissions()}{dirSetPermissions()}}
+{\footnotesize\ttfamily void dir\+Set\+Permissions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{size\+\_\+t}]{permissions }\end{DoxyParamCaption})}
+
+
+
+Set directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. 
+
+\mbox{\Hypertarget{tas__directory_8h_a6f49bc8ed4a3343394fc5fafce2c080d}\label{tas__directory_8h_a6f49bc8ed4a3343394fc5fafce2c080d}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirSetPermissionsCStr@{dirSetPermissionsCStr}}
+\index{dirSetPermissionsCStr@{dirSetPermissionsCStr}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirSetPermissionsCStr()}{dirSetPermissionsCStr()}}
+{\footnotesize\ttfamily void dir\+Set\+Permissions\+CStr (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path,  }\item[{size\+\_\+t}]{permissions }\end{DoxyParamCaption})}
+
+
+
+Set directory Permissions in mode\+\_\+t format \href{https://man7.org/linux/man-pages/man2/lstat.2.html}{\texttt{ https\+://man7.\+org/linux/man-\/pages/man2/lstat.\+2.\+html}}. 
+

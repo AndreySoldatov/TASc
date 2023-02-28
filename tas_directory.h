@@ -1,6 +1,16 @@
 #ifndef TAS_DIRECTORY
 #define TAS_DIRECTORY
 
+/**
+ * @file tas_directory.h
+ * @brief This file provides basic directory manipulation functionality
+ * @version 0.1
+ * @date 2023-02-28
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #include "tas_string.h"
 #include <dirent.h>
 #include <sys/types.h>
@@ -11,7 +21,7 @@
  * Enumerates all the directory's children in StrVec.
  * Return value is a FULL PATH
 */
-StrVec dirListContent(char const * path) {
+StrVec dirListContentCStr(char const * path) {
     StrVec res;
     res.data = NULL;
     res.length = 0;
@@ -40,6 +50,14 @@ StrVec dirListContent(char const * path) {
     closedir(d);
 
     return res;
+}
+
+/**
+ * Enumerates all the directory's children in StrVec.
+ * Return value is a FULL PATH
+*/
+StrVec dirListContent(Str str) {
+    return dirListContentCStr(str.data);
 }
 
 /**
