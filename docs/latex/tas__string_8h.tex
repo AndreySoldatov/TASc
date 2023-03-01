@@ -5,22 +5,25 @@
 This file provides a \mbox{\hyperlink{structStr}{Str}} data type for dynamically allocated string and some basic manipulation with it.  
 
 
+{\ttfamily \#include \char`\"{}tas\+\_\+bytebuffer.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
-Include dependency graph for tas\+\_\+string.\+h\+:\nopagebreak
+Include dependency graph for tas\+\_\+string.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{tas__string_8h__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=252pt]{tas__string_8h__dep__incl}
+\includegraphics[width=338pt]{tas__string_8h__dep__incl}
 \end{center}
 \end{figure}
 \doxysubsection*{Classes}
@@ -76,13 +79,13 @@ bool \mbox{\hyperlink{tas__string_8h_adf953d138dfe91ac54f18cce382834f7}{str\+Com
 bool \mbox{\hyperlink{tas__string_8h_ab28dd45c6b10049b2b048cf490c1a9c6}{str\+Compare\+CStr}} (\mbox{\hyperlink{structStr}{Str}} str1, char const $\ast$str2)
 \begin{DoxyCompactList}\small\item\em Compare string and C-\/\+String for equality. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{tas__string_8h_a13366a2ba5c461ed2af523c102ce2022}{str\+Ends\+With}} (\mbox{\hyperlink{structStr}{Str}} str1, \mbox{\hyperlink{structStr}{Str}} str2)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if \mbox{\hyperlink{structStr}{Str}} ends with some suffix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{tas__string_8h_a221670af804bb3c956877b466e4f9ae1}{str\+Ends\+With\+CStr}} (\mbox{\hyperlink{structStr}{Str}} str1, char const $\ast$str2)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if \mbox{\hyperlink{structStr}{Str}} ends with some C-\/\+String suffix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{tas__string_8h_a5485ccfae871070ca090724a991c13fe}{str\+Starts\+With}} (\mbox{\hyperlink{structStr}{Str}} str1, \mbox{\hyperlink{structStr}{Str}} str2)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if \mbox{\hyperlink{structStr}{Str}} starts with some prefix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{tas__string_8h_a5611633db040d9cebf298a5576f5e16b}{str\+Starts\+With\+CStr}} (\mbox{\hyperlink{structStr}{Str}} str1, char const $\ast$str2)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if \mbox{\hyperlink{structStr}{Str}} starts with some C-\/\+String prefix. \end{DoxyCompactList}\item 
 char \mbox{\hyperlink{tas__string_8h_ad0e7ad6816a5d3333e6a69cee21cfaf3}{str\+At}} (\mbox{\hyperlink{structStr}{Str}} str, size\+\_\+t index)
 \begin{DoxyCompactList}\small\item\em Get immutable string element at index. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{tas__string_8h_aa6ca60fe52ff66f1459455c01d3e037e}{str\+Set}} (\mbox{\hyperlink{structStr}{Str}} $\ast$str, size\+\_\+t index, char c)
@@ -93,8 +96,14 @@ size\+\_\+t \mbox{\hyperlink{tas__string_8h_a3d757063983a7493032a7386cb51750a}{s
 \begin{DoxyCompactList}\small\item\em Find the last occurence of char in string. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{tas__string_8h_af70802fb0d897a12a9dd4a7eb584ee5d}{str\+Vec\+Delete}} (\mbox{\hyperlink{structStrVec}{Str\+Vec}} $\ast$vec)
 \begin{DoxyCompactList}\small\item\em Use this function to clear \mbox{\hyperlink{structStrVec}{Str\+Vec}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{tas__string_8h_afd131de84d65ebf3f884b4ab9d79d34c}{str\+Vec\+From\+CStr\+Array}} (int c, char $\ast$$\ast$v)
+\begin{DoxyCompactList}\small\item\em Convert C-\/string array (int size, char $\ast$$\ast$ data) to \mbox{\hyperlink{structStrVec}{Str\+Vec}} WARNING\+: Copying. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__string_8h_a1dcd9b2731f6cd69b7cc732b658ff975}{str\+Vec\+Contanins}} (\mbox{\hyperlink{structStrVec}{Str\+Vec}} v, char const $\ast$str)
+\begin{DoxyCompactList}\small\item\em Checks if \mbox{\hyperlink{structStrVec}{Str\+Vec}} contains C-\/style str. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structStrVec}{Str\+Vec}} \mbox{\hyperlink{tas__string_8h_a7886f5eb3dd9ce238a9e1b557879d7d4}{str\+Split}} (\mbox{\hyperlink{structStr}{Str}} str, char del)
-\begin{DoxyCompactList}\small\item\em Split string using delimiter and return result as \mbox{\hyperlink{structStrVec}{Str\+Vec}} The source string remains untouched WARNING\+: Copying. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Split string using delimiter and return result as \mbox{\hyperlink{structStrVec}{Str\+Vec}} The source string remains untouched WARNING\+: Copying. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} \mbox{\hyperlink{tas__string_8h_ac44ba210778099b5b9c913bcaf043eee}{str\+To\+Byte\+Buffer}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em Converts String to byte\+Buffer WARNING\+: Moving. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -234,11 +243,19 @@ This function needs to be called after creating and using a string to avoid memo
 \doxysubsubsection{\texorpdfstring{strEndsWith()}{strEndsWith()}}
 {\footnotesize\ttfamily bool str\+Ends\+With (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{str2 }\end{DoxyParamCaption})}
 
+
+
+Checks if \mbox{\hyperlink{structStr}{Str}} ends with some suffix. 
+
 \mbox{\Hypertarget{tas__string_8h_a221670af804bb3c956877b466e4f9ae1}\label{tas__string_8h_a221670af804bb3c956877b466e4f9ae1}} 
 \index{tas\_string.h@{tas\_string.h}!strEndsWithCStr@{strEndsWithCStr}}
 \index{strEndsWithCStr@{strEndsWithCStr}!tas\_string.h@{tas\_string.h}}
 \doxysubsubsection{\texorpdfstring{strEndsWithCStr()}{strEndsWithCStr()}}
 {\footnotesize\ttfamily bool str\+Ends\+With\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{char const $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+
+
+Checks if \mbox{\hyperlink{structStr}{Str}} ends with some C-\/\+String suffix. 
 
 \mbox{\Hypertarget{tas__string_8h_ac3074b3241f7c4c8b25830efb4792dc4}\label{tas__string_8h_ac3074b3241f7c4c8b25830efb4792dc4}} 
 \index{tas\_string.h@{tas\_string.h}!strFindFirsOf@{strFindFirsOf}}
@@ -356,17 +373,45 @@ If your string is big enough this can be a problem \mbox{\Hypertarget{tas__strin
 \doxysubsubsection{\texorpdfstring{strStartsWith()}{strStartsWith()}}
 {\footnotesize\ttfamily bool str\+Starts\+With (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{\mbox{\hyperlink{structStr}{Str}}}]{str2 }\end{DoxyParamCaption})}
 
+
+
+Checks if \mbox{\hyperlink{structStr}{Str}} starts with some prefix. 
+
 \mbox{\Hypertarget{tas__string_8h_a5611633db040d9cebf298a5576f5e16b}\label{tas__string_8h_a5611633db040d9cebf298a5576f5e16b}} 
 \index{tas\_string.h@{tas\_string.h}!strStartsWithCStr@{strStartsWithCStr}}
 \index{strStartsWithCStr@{strStartsWithCStr}!tas\_string.h@{tas\_string.h}}
 \doxysubsubsection{\texorpdfstring{strStartsWithCStr()}{strStartsWithCStr()}}
 {\footnotesize\ttfamily bool str\+Starts\+With\+CStr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str1,  }\item[{char const $\ast$}]{str2 }\end{DoxyParamCaption})}
 
+
+
+Checks if \mbox{\hyperlink{structStr}{Str}} starts with some C-\/\+String prefix. 
+
 \mbox{\Hypertarget{tas__string_8h_aaa791c5198c6207c26008ba5c9eb9b7d}\label{tas__string_8h_aaa791c5198c6207c26008ba5c9eb9b7d}} 
 \index{tas\_string.h@{tas\_string.h}!strSub@{strSub}}
 \index{strSub@{strSub}!tas\_string.h@{tas\_string.h}}
 \doxysubsubsection{\texorpdfstring{strSub()}{strSub()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}} str\+Sub (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str,  }\item[{size\+\_\+t}]{first,  }\item[{size\+\_\+t}]{last }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tas__string_8h_ac44ba210778099b5b9c913bcaf043eee}\label{tas__string_8h_ac44ba210778099b5b9c913bcaf043eee}} 
+\index{tas\_string.h@{tas\_string.h}!strToByteBuffer@{strToByteBuffer}}
+\index{strToByteBuffer@{strToByteBuffer}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strToByteBuffer()}{strToByteBuffer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} str\+To\+Byte\+Buffer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+Converts String to byte\+Buffer WARNING\+: Moving. 
+
+\mbox{\Hypertarget{tas__string_8h_a1dcd9b2731f6cd69b7cc732b658ff975}\label{tas__string_8h_a1dcd9b2731f6cd69b7cc732b658ff975}} 
+\index{tas\_string.h@{tas\_string.h}!strVecContanins@{strVecContanins}}
+\index{strVecContanins@{strVecContanins}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strVecContanins()}{strVecContanins()}}
+{\footnotesize\ttfamily bool str\+Vec\+Contanins (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStrVec}{Str\+Vec}}}]{v,  }\item[{char const $\ast$}]{str }\end{DoxyParamCaption})}
+
+
+
+Checks if \mbox{\hyperlink{structStrVec}{Str\+Vec}} contains C-\/style str. 
 
 \mbox{\Hypertarget{tas__string_8h_af70802fb0d897a12a9dd4a7eb584ee5d}\label{tas__string_8h_af70802fb0d897a12a9dd4a7eb584ee5d}} 
 \index{tas\_string.h@{tas\_string.h}!strVecDelete@{strVecDelete}}
@@ -377,4 +422,14 @@ If your string is big enough this can be a problem \mbox{\Hypertarget{tas__strin
 
 
 Use this function to clear \mbox{\hyperlink{structStrVec}{Str\+Vec}}. 
+
+\mbox{\Hypertarget{tas__string_8h_afd131de84d65ebf3f884b4ab9d79d34c}\label{tas__string_8h_afd131de84d65ebf3f884b4ab9d79d34c}} 
+\index{tas\_string.h@{tas\_string.h}!strVecFromCStrArray@{strVecFromCStrArray}}
+\index{strVecFromCStrArray@{strVecFromCStrArray}!tas\_string.h@{tas\_string.h}}
+\doxysubsubsection{\texorpdfstring{strVecFromCStrArray()}{strVecFromCStrArray()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStrVec}{Str\+Vec}} str\+Vec\+From\+CStr\+Array (\begin{DoxyParamCaption}\item[{int}]{c,  }\item[{char $\ast$$\ast$}]{v }\end{DoxyParamCaption})}
+
+
+
+Convert C-\/string array (int size, char $\ast$$\ast$ data) to \mbox{\hyperlink{structStrVec}{Str\+Vec}} WARNING\+: Copying. 
 

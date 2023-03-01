@@ -1,0 +1,79 @@
+\hypertarget{tas__args_8h}{}\doxysection{tas\+\_\+args.\+h File Reference}
+\label{tas__args_8h}\index{tas\_args.h@{tas\_args.h}}
+
+
+Super tiny functionality for working with console arguments.  
+
+
+{\ttfamily \#include \char`\"{}tas\+\_\+string.\+h\char`\"{}}\newline
+Include dependency graph for tas\+\_\+args.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tas__args_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{tas__args_8h_ac01314ef3f9ef59db9da39866c239d19}{args\+Contain\+Flag}} (\mbox{\hyperlink{structStrVec}{Str\+Vec}} v, char const $\ast$flag)
+\begin{DoxyCompactList}\small\item\em Check if vector of arguments contains the certain flag Flag is defined by \char`\"{}-\/\%flag\+\_\+name\%\char`\"{} expression. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{tas__args_8h_a71d860f5e00539af842c2d40a3d37b3b}{args\+Contain\+Flag\+With\+Message}} (\mbox{\hyperlink{structStrVec}{Str\+Vec}} v, char const $\ast$flag)
+\begin{DoxyCompactList}\small\item\em Check if arguments vector contains flag with \#-\/braced message Example -\/d\#/home/soft/\#. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__args_8h_a2c31358ac5bdd1dbe3a3a21efa10d996}{args\+Get\+Message\+From\+Flag}} (\mbox{\hyperlink{structStrVec}{Str\+Vec}} v, char const $\ast$flag)
+\begin{DoxyCompactList}\small\item\em Extract \#-\/braced message from flags Vector, given the flag\+\_\+name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Super tiny functionality for working with console arguments. 
+
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/03-\/01
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tas__args_8h_ac01314ef3f9ef59db9da39866c239d19}\label{tas__args_8h_ac01314ef3f9ef59db9da39866c239d19}} 
+\index{tas\_args.h@{tas\_args.h}!argsContainFlag@{argsContainFlag}}
+\index{argsContainFlag@{argsContainFlag}!tas\_args.h@{tas\_args.h}}
+\doxysubsubsection{\texorpdfstring{argsContainFlag()}{argsContainFlag()}}
+{\footnotesize\ttfamily bool args\+Contain\+Flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStrVec}{Str\+Vec}}}]{v,  }\item[{char const $\ast$}]{flag }\end{DoxyParamCaption})}
+
+
+
+Check if vector of arguments contains the certain flag Flag is defined by \char`\"{}-\/\%flag\+\_\+name\%\char`\"{} expression. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Vector of arguments \\
+\hline
+{\em flag} & flag name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{tas__args_8h_a71d860f5e00539af842c2d40a3d37b3b}\label{tas__args_8h_a71d860f5e00539af842c2d40a3d37b3b}} 
+\index{tas\_args.h@{tas\_args.h}!argsContainFlagWithMessage@{argsContainFlagWithMessage}}
+\index{argsContainFlagWithMessage@{argsContainFlagWithMessage}!tas\_args.h@{tas\_args.h}}
+\doxysubsubsection{\texorpdfstring{argsContainFlagWithMessage()}{argsContainFlagWithMessage()}}
+{\footnotesize\ttfamily bool args\+Contain\+Flag\+With\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStrVec}{Str\+Vec}}}]{v,  }\item[{char const $\ast$}]{flag }\end{DoxyParamCaption})}
+
+
+
+Check if arguments vector contains flag with \#-\/braced message Example -\/d\#/home/soft/\#. 
+
+\mbox{\Hypertarget{tas__args_8h_a2c31358ac5bdd1dbe3a3a21efa10d996}\label{tas__args_8h_a2c31358ac5bdd1dbe3a3a21efa10d996}} 
+\index{tas\_args.h@{tas\_args.h}!argsGetMessageFromFlag@{argsGetMessageFromFlag}}
+\index{argsGetMessageFromFlag@{argsGetMessageFromFlag}!tas\_args.h@{tas\_args.h}}
+\doxysubsubsection{\texorpdfstring{argsGetMessageFromFlag()}{argsGetMessageFromFlag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}} args\+Get\+Message\+From\+Flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStrVec}{Str\+Vec}}}]{v,  }\item[{char const $\ast$}]{flag }\end{DoxyParamCaption})}
+
+
+
+Extract \#-\/braced message from flags Vector, given the flag\+\_\+name. 
+

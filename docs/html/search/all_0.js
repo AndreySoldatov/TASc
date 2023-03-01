@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['byte_0',['Byte',['../tas__files_8h.html#ae3a497195d617519e5353ea7b417940f',1,'tas_files.h']]],
-  ['bytebuffer_1',['ByteBuffer',['../structByteBuffer.html',1,'ByteBuffer'],['../tas__files_8h.html#abef3871bd963532b694b446b6769ecca',1,'ByteBuffer():&#160;tas_files.h']]],
-  ['bytebufferdelete_2',['byteBufferDelete',['../tas__files_8h.html#ab295e61909a526d970ee3401b94d73c6',1,'tas_files.h']]]
+  ['argscontainflag_0',['argsContainFlag',['../tas__args_8h.html#ac01314ef3f9ef59db9da39866c239d19',1,'tas_args.h']]],
+  ['argscontainflagwithmessage_1',['argsContainFlagWithMessage',['../tas__args_8h.html#a71d860f5e00539af842c2d40a3d37b3b',1,'tas_args.h']]],
+  ['argsgetmessagefromflag_2',['argsGetMessageFromFlag',['../tas__args_8h.html#a2c31358ac5bdd1dbe3a3a21efa10d996',1,'tas_args.h']]]
 ];

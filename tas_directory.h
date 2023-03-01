@@ -112,4 +112,35 @@ bool dirExisits(Str path) {
     return access(path.data, F_OK) == 0;
 }
 
+/**
+ * Returns String containing path to the dir's parent directory
+ * WARNING: Doesn't work with relative path 
+*/
+Str dirParentDir(Str str) {
+    if(strFindLastOf(str, '/', 0) != STR_BAD_INDEX) {
+        return strSub(str, 0, strFindLastOf(str, '/', 0) + 1);
+    } else {
+        return strNew("");
+    }
+}
+
+/**
+ * Returns String containg dir name from path.
+*/
+Str dirName(Str str) {
+    if(strAt(str, str.length - 1) == '/') {
+        return strSub(str, strFindLastOf(str, '/', 1) + 1, str.length - 1);
+    } else {
+        return strSub(str, strFindLastOf(str, '/', 0) + 0, str.length);
+    }
+}
+
+/**
+ * @brief Create directory, given the path and permissions in mode_t format 
+ * 
+ */
+void dirCreate(char const * path, size_t permissions) {
+    mkdir(path, permissions);
+}
+
 #endif

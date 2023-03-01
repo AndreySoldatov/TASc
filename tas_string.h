@@ -23,6 +23,7 @@
  * 
  */
 
+#include "tas_bytebuffer.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -188,6 +189,9 @@ bool strCompareCStr(Str str1, char const *str2) {
     return !strcmp(str1.data, str2);
 }
 
+/**
+ * @brief Checks if Str ends with some suffix
+ */
 bool strEndsWith(Str str1, Str str2) {
     if(str2.length > str1.length) {
         error_exit("strEndsWith error: str2 > str1")
@@ -198,6 +202,9 @@ bool strEndsWith(Str str1, Str str2) {
     return res;
 }
 
+/**
+ * @brief Checks if Str ends with some C-String suffix
+ */
 bool strEndsWithCStr(Str str1, char const * str2) {
     Str tmp = strNew(str2);
     bool res = strEndsWith(str1, tmp);
@@ -205,9 +212,12 @@ bool strEndsWithCStr(Str str1, char const * str2) {
     return res;
 }
 
+/**
+ * @brief Checks if Str starts with some prefix
+ */
 bool strStartsWith(Str str1, Str str2) {
     if(str2.length > str1.length) {
-        error_exit("strStartsWith error: str2 > str1")
+        return false;
     }
     Str sub = strSub(str1, 0, str2.length);
     bool res = strCompare(sub, str2);
@@ -215,6 +225,9 @@ bool strStartsWith(Str str1, Str str2) {
     return res;
 }
 
+/**
+ * @brief Checks if Str starts with some C-String prefix
+ */
 bool strStartsWithCStr(Str str1, char const * str2) {
     Str tmp = strNew(str2);
     bool res = strStartsWith(str1, tmp);
@@ -290,6 +303,33 @@ void strVecDelete(StrVec *vec) {
 }
 
 /**
+ * @brief Convert C-string array (int size, char ** data) to StrVec
+ * WARNING: Copying
+ * 
+ */
+StrVec strVecFromCStrArray(int c, char ** v) {
+    StrVec res;
+    res.length = c;
+    res.data = (Str*)calloc(c, sizeof(Str));
+    for (size_t i = 0; i < c; i++) {
+        res.data[i] = strNew(v[i]);
+    }
+    return res;
+}
+
+/**
+ * @brief Checks if StrVec contains C-style str 
+ * 
+ */
+bool strVecContanins(StrVec v, char const *str) {
+    bool res = false;
+    for (size_t i = 0; i < v.length; i++) {
+        if(strCompareCStr(v.data[i], str)) return true;
+    }
+    return res;
+}
+
+/**
  * Split string using delimiter and return result as StrVec
  * The source string remains untouched
  * WARNING: Copying. If your string is big enough this can be a problem
@@ -330,6 +370,18 @@ StrVec strSplit(Str str, char del) {
     }
 
     return res;
+}
+
+/**
+ * @brief Converts String to byteBuffer
+ * WARNING: Moving
+ * 
+ */
+ByteBuffer strToByteBuffer(Str str) {
+    ByteBuffer b;
+    b.data = (Byte *)str.data;
+    b.length = str.length;
+    return b;
 }
 
 #endif

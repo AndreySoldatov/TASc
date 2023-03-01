@@ -80,16 +80,17 @@ Include dependency graph for tas_directory.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="tas__directory_8h__incl.png" border="0" usemap="#atas__directory_8h" alt=""/></div>
 <map name="atas__directory_8h" id="atas__directory_8h">
-<area shape="rect" title="This file provides basic directory manipulation functionality." alt="" coords="341,5,458,32"/>
-<area shape="rect" href="tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="133,80,231,107"/>
-<area shape="rect" title=" " alt="" coords="255,80,327,107"/>
-<area shape="rect" title=" " alt="" coords="351,80,447,107"/>
-<area shape="rect" title=" " alt="" coords="471,80,557,107"/>
-<area shape="rect" title=" " alt="" coords="581,80,655,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,76,181"/>
-<area shape="rect" title=" " alt="" coords="100,155,171,181"/>
-<area shape="rect" title=" " alt="" coords="195,155,262,181"/>
-<area shape="rect" title=" " alt="" coords="286,155,369,181"/>
+<area shape="rect" title="This file provides basic directory manipulation functionality." alt="" coords="402,5,519,32"/>
+<area shape="rect" href="tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="194,80,293,107"/>
+<area shape="rect" title=" " alt="" coords="317,80,389,107"/>
+<area shape="rect" title=" " alt="" coords="413,80,509,107"/>
+<area shape="rect" title=" " alt="" coords="533,80,618,107"/>
+<area shape="rect" title=" " alt="" coords="642,80,717,107"/>
+<area shape="rect" href="tas__bytebuffer_8h.html" title="Originally part of tas_files, but for the sake of generalisation purpuses was moved here." alt="" coords="5,155,132,181"/>
+<area shape="rect" title=" " alt="" coords="84,229,155,256"/>
+<area shape="rect" title=" " alt="" coords="208,155,279,181"/>
+<area shape="rect" title=" " alt="" coords="303,155,370,181"/>
+<area shape="rect" title=" " alt="" coords="394,155,477,181"/>
 </map>
 </div>
 </div>
@@ -121,6 +122,15 @@ Functions</h2></td></tr>
 <tr class="memitem:aaaf44381fe3bcaec0e293910ade6ff08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__directory_8h.html#aaaf44381fe3bcaec0e293910ade6ff08">dirExisits</a> (<a class="el" href="structStr.html">Str</a> path)</td></tr>
 <tr class="memdesc:aaaf44381fe3bcaec0e293910ade6ff08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if directory exists.  <a href="tas__directory_8h.html#aaaf44381fe3bcaec0e293910ade6ff08">More...</a><br /></td></tr>
 <tr class="separator:aaaf44381fe3bcaec0e293910ade6ff08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6e249e63288c169895d0017c7197a1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structStr.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__directory_8h.html#ae6e249e63288c169895d0017c7197a1a">dirParentDir</a> (<a class="el" href="structStr.html">Str</a> str)</td></tr>
+<tr class="memdesc:ae6e249e63288c169895d0017c7197a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns String containing path to the dir's parent directory WARNING: Doesn't work with relative path.  <a href="tas__directory_8h.html#ae6e249e63288c169895d0017c7197a1a">More...</a><br /></td></tr>
+<tr class="separator:ae6e249e63288c169895d0017c7197a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a078f182e859d9e126527aa8ea1b3048f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structStr.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__directory_8h.html#a078f182e859d9e126527aa8ea1b3048f">dirName</a> (<a class="el" href="structStr.html">Str</a> str)</td></tr>
+<tr class="memdesc:a078f182e859d9e126527aa8ea1b3048f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns String containg dir name from path.  <a href="tas__directory_8h.html#a078f182e859d9e126527aa8ea1b3048f">More...</a><br /></td></tr>
+<tr class="separator:a078f182e859d9e126527aa8ea1b3048f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7be6b575fbfdd4fc7d301652805e795c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__directory_8h.html#a7be6b575fbfdd4fc7d301652805e795c">dirCreate</a> (char const *path, size_t permissions)</td></tr>
+<tr class="memdesc:a7be6b575fbfdd4fc7d301652805e795c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create directory, given the path and permissions in mode_t format.  <a href="tas__directory_8h.html#a7be6b575fbfdd4fc7d301652805e795c">More...</a><br /></td></tr>
+<tr class="separator:a7be6b575fbfdd4fc7d301652805e795c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file provides basic directory manipulation functionality. </p>
@@ -128,6 +138,36 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2023-02-28</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a7be6b575fbfdd4fc7d301652805e795c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7be6b575fbfdd4fc7d301652805e795c">&#9670;&nbsp;</a></span>dirCreate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dirCreate </td>
+          <td>(</td>
+          <td class="paramtype">char const *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>permissions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create directory, given the path and permissions in mode_t format. </p>
+
+</div>
+</div>
 <a id="aaaf44381fe3bcaec0e293910ade6ff08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaf44381fe3bcaec0e293910ade6ff08">&#9670;&nbsp;</a></span>dirExisits()</h2>
 
@@ -207,6 +247,46 @@ Functions</h2></td></tr>
 
 <p>Enumerates all the directory's children in <a class="el" href="structStrVec.html" title="String vector data type; TODO: Impliment basic vector manipulation Use raw contents for now.">StrVec</a>. </p>
 <p>Return value is a FULL PATH </p>
+
+</div>
+</div>
+<a id="a078f182e859d9e126527aa8ea1b3048f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a078f182e859d9e126527aa8ea1b3048f">&#9670;&nbsp;</a></span>dirName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structStr.html">Str</a> dirName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structStr.html">Str</a>&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns String containg dir name from path. </p>
+
+</div>
+</div>
+<a id="ae6e249e63288c169895d0017c7197a1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6e249e63288c169895d0017c7197a1a">&#9670;&nbsp;</a></span>dirParentDir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structStr.html">Str</a> dirParentDir </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structStr.html">Str</a>&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns String containing path to the dir's parent directory WARNING: Doesn't work with relative path. </p>
 
 </div>
 </div>

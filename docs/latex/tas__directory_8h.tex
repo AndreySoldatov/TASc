@@ -10,7 +10,8 @@ This file provides basic directory manipulation functionality.
 {\ttfamily \#include $<$sys/types.\+h$>$}\newline
 {\ttfamily \#include $<$sys/stat.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
-Include dependency graph for tas\+\_\+directory.\+h\+:\nopagebreak
+Include dependency graph for tas\+\_\+directory.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -35,7 +36,13 @@ void \mbox{\hyperlink{tas__directory_8h_a1499da2d64c649a5f71373093412be5f}{dir\+
 bool \mbox{\hyperlink{tas__directory_8h_a238bc244d8a93584622f853b772d9c1e}{dir\+Exisits\+CStr}} (char const $\ast$path)
 \begin{DoxyCompactList}\small\item\em Check if directory exists. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{tas__directory_8h_aaaf44381fe3bcaec0e293910ade6ff08}{dir\+Exisits}} (\mbox{\hyperlink{structStr}{Str}} path)
-\begin{DoxyCompactList}\small\item\em Check if directory exists. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Check if directory exists. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__directory_8h_ae6e249e63288c169895d0017c7197a1a}{dir\+Parent\+Dir}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em Returns String containing path to the dir\textquotesingle{}s parent directory WARNING\+: Doesn\textquotesingle{}t work with relative path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__directory_8h_a078f182e859d9e126527aa8ea1b3048f}{dir\+Name}} (\mbox{\hyperlink{structStr}{Str}} str)
+\begin{DoxyCompactList}\small\item\em Returns String containg dir name from path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{tas__directory_8h_a7be6b575fbfdd4fc7d301652805e795c}{dir\+Create}} (char const $\ast$path, size\+\_\+t permissions)
+\begin{DoxyCompactList}\small\item\em Create directory, given the path and permissions in mode\+\_\+t format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -53,6 +60,16 @@ Copyright (c) 2023
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tas__directory_8h_a7be6b575fbfdd4fc7d301652805e795c}\label{tas__directory_8h_a7be6b575fbfdd4fc7d301652805e795c}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirCreate@{dirCreate}}
+\index{dirCreate@{dirCreate}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirCreate()}{dirCreate()}}
+{\footnotesize\ttfamily void dir\+Create (\begin{DoxyParamCaption}\item[{char const $\ast$}]{path,  }\item[{size\+\_\+t}]{permissions }\end{DoxyParamCaption})}
+
+
+
+Create directory, given the path and permissions in mode\+\_\+t format. 
+
 \mbox{\Hypertarget{tas__directory_8h_aaaf44381fe3bcaec0e293910ade6ff08}\label{tas__directory_8h_aaaf44381fe3bcaec0e293910ade6ff08}} 
 \index{tas\_directory.h@{tas\_directory.h}!dirExisits@{dirExisits}}
 \index{dirExisits@{dirExisits}!tas\_directory.h@{tas\_directory.h}}
@@ -93,7 +110,27 @@ Return value is a FULL PATH \mbox{\Hypertarget{tas__directory_8h_a168c17eff94831
 
 Enumerates all the directory\textquotesingle{}s children in \mbox{\hyperlink{structStrVec}{Str\+Vec}}. 
 
-Return value is a FULL PATH \mbox{\Hypertarget{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}\label{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}} 
+Return value is a FULL PATH \mbox{\Hypertarget{tas__directory_8h_a078f182e859d9e126527aa8ea1b3048f}\label{tas__directory_8h_a078f182e859d9e126527aa8ea1b3048f}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirName@{dirName}}
+\index{dirName@{dirName}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirName()}{dirName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}} dir\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+Returns String containg dir name from path. 
+
+\mbox{\Hypertarget{tas__directory_8h_ae6e249e63288c169895d0017c7197a1a}\label{tas__directory_8h_ae6e249e63288c169895d0017c7197a1a}} 
+\index{tas\_directory.h@{tas\_directory.h}!dirParentDir@{dirParentDir}}
+\index{dirParentDir@{dirParentDir}!tas\_directory.h@{tas\_directory.h}}
+\doxysubsubsection{\texorpdfstring{dirParentDir()}{dirParentDir()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStr}{Str}} dir\+Parent\+Dir (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStr}{Str}}}]{str }\end{DoxyParamCaption})}
+
+
+
+Returns String containing path to the dir\textquotesingle{}s parent directory WARNING\+: Doesn\textquotesingle{}t work with relative path. 
+
+\mbox{\Hypertarget{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}\label{tas__directory_8h_a0fef00fd69c90ecd3180a850a0061949}} 
 \index{tas\_directory.h@{tas\_directory.h}!dirPermissions@{dirPermissions}}
 \index{dirPermissions@{dirPermissions}!tas\_directory.h@{tas\_directory.h}}
 \doxysubsubsection{\texorpdfstring{dirPermissions()}{dirPermissions()}}

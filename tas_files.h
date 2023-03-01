@@ -12,6 +12,7 @@
  */
 
 #include "tas_string.h"
+#include "tas_bytebuffer.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -37,23 +38,6 @@ Str fileReadToStr(char const *path) {
     res.data[fsize] = 0;
 
     return res;
-}
-
-typedef unsigned char Byte;
-
-/**
- * Struct for holding an array of bytes
-*/
-typedef struct ByteBuffer {
-    Byte *data;
-    size_t length;
-} ByteBuffer;
-
-/**
- * Function for deleting byte buffers you MUST call it explicitly for every ByteBuffer object
-*/
-void byteBufferDelete(ByteBuffer *b) {
-    free(b->data);
 }
 
 /**

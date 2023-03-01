@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['readme_31',['README',['../md_README.html',1,'']]],
-  ['readme_2emd_32',['README.md',['../README_8md.html',1,'']]]
+  ['length_36',['length',['../structByteBuffer.html#aa58adcad6f0554affd59a8f9ddb34a6a',1,'ByteBuffer::length()'],['../structStr.html#aa53824ae382af1ee8bc604fb9275602f',1,'Str::length()'],['../structStrVec.html#acf73aecdb35916b5942f74987b7cdb1d',1,'StrVec::length()']]]
 ];

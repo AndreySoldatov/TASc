@@ -6,35 +6,23 @@ This File provides basic file manipulation functions.
 
 
 {\ttfamily \#include \char`\"{}tas\+\_\+string.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}tas\+\_\+bytebuffer.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$sys/types.\+h$>$}\newline
 {\ttfamily \#include $<$sys/stat.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
-Include dependency graph for tas\+\_\+files.\+h\+:\nopagebreak
+Include dependency graph for tas\+\_\+files.\+h\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{tas__files_8h__incl}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}
-\begin{DoxyCompactList}\small\item\em Struct for holding an array of bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef unsigned char \mbox{\hyperlink{tas__files_8h_ae3a497195d617519e5353ea7b417940f}{Byte}}
-\item 
-typedef struct \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} \mbox{\hyperlink{tas__files_8h_abef3871bd963532b694b446b6769ecca}{Byte\+Buffer}}
-\begin{DoxyCompactList}\small\item\em Struct for holding an array of bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{structStr}{Str}} \mbox{\hyperlink{tas__files_8h_a7ac385df03bdcd3819e6b9c6902d12e0}{file\+Read\+To\+Str}} (char const $\ast$path)
 \begin{DoxyCompactList}\small\item\em Read whole file to the ASCII String. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{tas__files_8h_ab295e61909a526d970ee3401b94d73c6}{byte\+Buffer\+Delete}} (\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} $\ast$b)
-\begin{DoxyCompactList}\small\item\em Function for deleting byte buffers you MUST call it explicitly for every \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} \mbox{\hyperlink{tas__files_8h_ae896af8fb225ff2f22b0633b50188c1d}{file\+Read\+Byte\+Buffer}} (char const $\ast$path)
 \begin{DoxyCompactList}\small\item\em Read whole file to the \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} object (unsigned char $\ast$) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{tas__files_8h_a10d565c52bae8962220b4a68b4c924c1}{file\+Write\+CStr}} (char const $\ast$path, char const $\ast$str)
@@ -83,36 +71,7 @@ Copyright (c) 2023
 \end{DoxyCopyright}
 
 
-\doxysubsection{Typedef Documentation}
-\mbox{\Hypertarget{tas__files_8h_ae3a497195d617519e5353ea7b417940f}\label{tas__files_8h_ae3a497195d617519e5353ea7b417940f}} 
-\index{tas\_files.h@{tas\_files.h}!Byte@{Byte}}
-\index{Byte@{Byte}!tas\_files.h@{tas\_files.h}}
-\doxysubsubsection{\texorpdfstring{Byte}{Byte}}
-{\footnotesize\ttfamily typedef unsigned char \mbox{\hyperlink{tas__files_8h_ae3a497195d617519e5353ea7b417940f}{Byte}}}
-
-\mbox{\Hypertarget{tas__files_8h_abef3871bd963532b694b446b6769ecca}\label{tas__files_8h_abef3871bd963532b694b446b6769ecca}} 
-\index{tas\_files.h@{tas\_files.h}!ByteBuffer@{ByteBuffer}}
-\index{ByteBuffer@{ByteBuffer}!tas\_files.h@{tas\_files.h}}
-\doxysubsubsection{\texorpdfstring{ByteBuffer}{ByteBuffer}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}}}
-
-
-
-Struct for holding an array of bytes. 
-
-
-
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{tas__files_8h_ab295e61909a526d970ee3401b94d73c6}\label{tas__files_8h_ab295e61909a526d970ee3401b94d73c6}} 
-\index{tas\_files.h@{tas\_files.h}!byteBufferDelete@{byteBufferDelete}}
-\index{byteBufferDelete@{byteBufferDelete}!tas\_files.h@{tas\_files.h}}
-\doxysubsubsection{\texorpdfstring{byteBufferDelete()}{byteBufferDelete()}}
-{\footnotesize\ttfamily void byte\+Buffer\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} $\ast$}]{b }\end{DoxyParamCaption})}
-
-
-
-Function for deleting byte buffers you MUST call it explicitly for every \mbox{\hyperlink{structByteBuffer}{Byte\+Buffer}} object. 
-
 \mbox{\Hypertarget{tas__files_8h_aa11e127fe973dd96116df30165b70c13}\label{tas__files_8h_aa11e127fe973dd96116df30165b70c13}} 
 \index{tas\_files.h@{tas\_files.h}!fileAppendByteBuffer@{fileAppendByteBuffer}}
 \index{fileAppendByteBuffer@{fileAppendByteBuffer}!tas\_files.h@{tas\_files.h}}

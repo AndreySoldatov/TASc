@@ -62,8 +62,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">tas_files.h File Reference</div>  </div>
@@ -73,6 +71,7 @@ $(function() {
 <p>This File provides basic file manipulation functions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="tas__string_8h_source.html">tas_string.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="tas__bytebuffer_8h_source.html">tas_bytebuffer.h</a>&quot;</code><br />
 <code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
@@ -81,42 +80,26 @@ Include dependency graph for tas_files.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="tas__files_8h__incl.png" border="0" usemap="#atas__files_8h" alt=""/></div>
 <map name="atas__files_8h" id="atas__files_8h">
-<area shape="rect" title="This File provides basic file manipulation functions." alt="" coords="317,5,405,32"/>
-<area shape="rect" href="tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="133,80,231,107"/>
-<area shape="rect" title=" " alt="" coords="255,80,351,107"/>
-<area shape="rect" title=" " alt="" coords="375,80,461,107"/>
-<area shape="rect" title=" " alt="" coords="485,80,559,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,76,181"/>
-<area shape="rect" title=" " alt="" coords="100,155,171,181"/>
-<area shape="rect" title=" " alt="" coords="195,155,262,181"/>
-<area shape="rect" title=" " alt="" coords="286,155,369,181"/>
+<area shape="rect" title="This File provides basic file manipulation functions." alt="" coords="283,5,371,32"/>
+<area shape="rect" href="tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="157,80,255,107"/>
+<area shape="rect" href="tas__bytebuffer_8h.html" title="Originally part of tas_files, but for the sake of generalisation purpuses was moved here." alt="" coords="5,155,132,181"/>
+<area shape="rect" title=" " alt="" coords="279,80,375,107"/>
+<area shape="rect" title=" " alt="" coords="399,80,485,107"/>
+<area shape="rect" title=" " alt="" coords="509,80,583,107"/>
+<area shape="rect" title=" " alt="" coords="84,229,155,256"/>
+<area shape="rect" title=" " alt="" coords="208,155,279,181"/>
+<area shape="rect" title=" " alt="" coords="303,155,370,181"/>
+<area shape="rect" title=" " alt="" coords="394,155,477,181"/>
 </map>
 </div>
 </div>
 <p><a href="tas__files_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structByteBuffer.html">ByteBuffer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct for holding an array of bytes.  <a href="structByteBuffer.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ae3a497195d617519e5353ea7b417940f"><td class="memItemLeft" align="right" valign="top">typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__files_8h.html#ae3a497195d617519e5353ea7b417940f">Byte</a></td></tr>
-<tr class="separator:ae3a497195d617519e5353ea7b417940f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abef3871bd963532b694b446b6769ecca"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structByteBuffer.html">ByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__files_8h.html#abef3871bd963532b694b446b6769ecca">ByteBuffer</a></td></tr>
-<tr class="memdesc:abef3871bd963532b694b446b6769ecca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struct for holding an array of bytes.  <a href="tas__files_8h.html#abef3871bd963532b694b446b6769ecca">More...</a><br /></td></tr>
-<tr class="separator:abef3871bd963532b694b446b6769ecca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7ac385df03bdcd3819e6b9c6902d12e0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structStr.html">Str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__files_8h.html#a7ac385df03bdcd3819e6b9c6902d12e0">fileReadToStr</a> (char const *path)</td></tr>
 <tr class="memdesc:a7ac385df03bdcd3819e6b9c6902d12e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read whole file to the ASCII String.  <a href="tas__files_8h.html#a7ac385df03bdcd3819e6b9c6902d12e0">More...</a><br /></td></tr>
 <tr class="separator:a7ac385df03bdcd3819e6b9c6902d12e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab295e61909a526d970ee3401b94d73c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__files_8h.html#ab295e61909a526d970ee3401b94d73c6">byteBufferDelete</a> (<a class="el" href="structByteBuffer.html">ByteBuffer</a> *b)</td></tr>
-<tr class="memdesc:ab295e61909a526d970ee3401b94d73c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for deleting byte buffers you MUST call it explicitly for every <a class="el" href="structByteBuffer.html" title="Struct for holding an array of bytes.">ByteBuffer</a> object.  <a href="tas__files_8h.html#ab295e61909a526d970ee3401b94d73c6">More...</a><br /></td></tr>
-<tr class="separator:ab295e61909a526d970ee3401b94d73c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae896af8fb225ff2f22b0633b50188c1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structByteBuffer.html">ByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tas__files_8h.html#ae896af8fb225ff2f22b0633b50188c1d">fileReadByteBuffer</a> (char const *path)</td></tr>
 <tr class="memdesc:ae896af8fb225ff2f22b0633b50188c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read whole file to the <a class="el" href="structByteBuffer.html" title="Struct for holding an array of bytes.">ByteBuffer</a> object (unsigned char *)  <a href="tas__files_8h.html#ae896af8fb225ff2f22b0633b50188c1d">More...</a><br /></td></tr>
 <tr class="separator:ae896af8fb225ff2f22b0633b50188c1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,58 +154,7 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-02-28</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 </dd></dl>
-</div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="ae3a497195d617519e5353ea7b417940f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3a497195d617519e5353ea7b417940f">&#9670;&nbsp;</a></span>Byte</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef unsigned char <a class="el" href="tas__files_8h.html#ae3a497195d617519e5353ea7b417940f">Byte</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abef3871bd963532b694b446b6769ecca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abef3871bd963532b694b446b6769ecca">&#9670;&nbsp;</a></span>ByteBuffer</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structByteBuffer.html">ByteBuffer</a> <a class="el" href="structByteBuffer.html">ByteBuffer</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Struct for holding an array of bytes. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ab295e61909a526d970ee3401b94d73c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab295e61909a526d970ee3401b94d73c6">&#9670;&nbsp;</a></span>byteBufferDelete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void byteBufferDelete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structByteBuffer.html">ByteBuffer</a> *&#160;</td>
-          <td class="paramname"><em>b</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Function for deleting byte buffers you MUST call it explicitly for every <a class="el" href="structByteBuffer.html" title="Struct for holding an array of bytes.">ByteBuffer</a> object. </p>
-
-</div>
-</div>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="aa11e127fe973dd96116df30165b70c13"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa11e127fe973dd96116df30165b70c13">&#9670;&nbsp;</a></span>fileAppendByteBuffer()</h2>
 

@@ -1,0 +1,7 @@
+<map id="tas_bytebuffer.h" name="tas_bytebuffer.h">
+<area shape="rect" id="node1" title="Originally part of tas_files, but for the sake of generalisation purpuses was moved here." alt="" coords="42,5,169,32"/>
+<area shape="rect" id="node2" href="$tas__files_8h.html" title="This File provides basic file manipulation functions." alt="" coords="5,155,93,181"/>
+<area shape="rect" id="node3" href="$tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="107,80,205,107"/>
+<area shape="rect" id="node4" href="$tas__args_8h.html" title="Super tiny functionality for working with console arguments." alt="" coords="118,155,207,181"/>
+<area shape="rect" id="node5" href="$tas__directory_8h.html" title="This file provides basic directory manipulation functionality." alt="" coords="232,155,349,181"/>
+</map>

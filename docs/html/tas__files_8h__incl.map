@@ -1,11 +1,12 @@
 <map id="tas_files.h" name="tas_files.h">
-<area shape="rect" id="node1" title="This File provides basic file manipulation functions." alt="" coords="317,5,405,32"/>
-<area shape="rect" id="node2" href="$tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="133,80,231,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="255,80,351,107"/>
-<area shape="rect" id="node8" title=" " alt="" coords="375,80,461,107"/>
-<area shape="rect" id="node9" title=" " alt="" coords="485,80,559,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,76,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="100,155,171,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="195,155,262,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="286,155,369,181"/>
+<area shape="rect" id="node1" title="This File provides basic file manipulation functions." alt="" coords="283,5,371,32"/>
+<area shape="rect" id="node2" href="$tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="157,80,255,107"/>
+<area shape="rect" id="node3" href="$tas__bytebuffer_8h.html" title="Originally part of tas_files, but for the sake of generalisation purpuses was moved here." alt="" coords="5,155,132,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="279,80,375,107"/>
+<area shape="rect" id="node9" title=" " alt="" coords="399,80,485,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="509,80,583,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="84,229,155,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="208,155,279,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="303,155,370,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="394,155,477,181"/>
 </map>

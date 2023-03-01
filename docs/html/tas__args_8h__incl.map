@@ -1,0 +1,9 @@
+<map id="tas_args.h" name="tas_args.h">
+<area shape="rect" id="node1" title="Super tiny functionality for working with console arguments." alt="" coords="199,5,288,32"/>
+<area shape="rect" id="node2" href="$tas__string_8h.html" title="This file provides a Str data type for dynamically allocated string and some basic manipulation with ..." alt="" coords="194,80,293,107"/>
+<area shape="rect" id="node3" href="$tas__bytebuffer_8h.html" title="Originally part of tas_files, but for the sake of generalisation purpuses was moved here." alt="" coords="5,155,132,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="84,229,155,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="208,155,279,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="303,155,370,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="394,155,477,181"/>
+</map>

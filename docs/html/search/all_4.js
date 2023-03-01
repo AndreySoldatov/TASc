@@ -1,4 +1,20 @@
 var searchData=
 [
-  ['length_30',['length',['../structByteBuffer.html#aa58adcad6f0554affd59a8f9ddb34a6a',1,'ByteBuffer::length()'],['../structStr.html#aa53824ae382af1ee8bc604fb9275602f',1,'Str::length()'],['../structStrVec.html#acf73aecdb35916b5942f74987b7cdb1d',1,'StrVec::length()']]]
+  ['fileappendbytebuffer_19',['fileAppendByteBuffer',['../tas__files_8h.html#aa11e127fe973dd96116df30165b70c13',1,'tas_files.h']]],
+  ['fileappendcstr_20',['fileAppendCStr',['../tas__files_8h.html#ac74345228a2007ca521a7ec8334704ea',1,'tas_files.h']]],
+  ['fileappendstr_21',['fileAppendStr',['../tas__files_8h.html#a6a406ccb3b7ac54ceb38bb2c52f03dd0',1,'tas_files.h']]],
+  ['fileexisits_22',['fileExisits',['../tas__files_8h.html#a0a3d89efcc33f0df9e89821dafa9ded8',1,'tas_files.h']]],
+  ['fileexisitscstr_23',['fileExisitsCStr',['../tas__files_8h.html#aa4431a0b6e53e5712613d36fe5e055fc',1,'tas_files.h']]],
+  ['fileextension_24',['fileExtension',['../tas__files_8h.html#aaadd67e42538677ce81c009dc6625472',1,'tas_files.h']]],
+  ['filename_25',['fileName',['../tas__files_8h.html#af02f26a18f1be52e03ef3a5686aed830',1,'tas_files.h']]],
+  ['fileparentdir_26',['fileParentDir',['../tas__files_8h.html#a95c83506d9d66f6264114f1e32b27a39',1,'tas_files.h']]],
+  ['filepermissions_27',['filePermissions',['../tas__files_8h.html#aa9c902b54d24e8f0aaf4650dcc33a20b',1,'tas_files.h']]],
+  ['filepermissionscstr_28',['filePermissionsCStr',['../tas__files_8h.html#a3544b88f12aa95ffa819e6b9f69f6e60',1,'tas_files.h']]],
+  ['filereadbytebuffer_29',['fileReadByteBuffer',['../tas__files_8h.html#ae896af8fb225ff2f22b0633b50188c1d',1,'tas_files.h']]],
+  ['filereadtostr_30',['fileReadToStr',['../tas__files_8h.html#a7ac385df03bdcd3819e6b9c6902d12e0',1,'tas_files.h']]],
+  ['filesetpermissions_31',['fileSetPermissions',['../tas__files_8h.html#a39f57f8ae266b1b1ee0fb1d38b386fa7',1,'tas_files.h']]],
+  ['filesetpermissionscstr_32',['fileSetPermissionsCStr',['../tas__files_8h.html#a8beb9eaa4f10638acd795887c0cbef45',1,'tas_files.h']]],
+  ['filewritebytebuffer_33',['fileWriteByteBuffer',['../tas__files_8h.html#af1288a513d1ad730a1364b21d58e3368',1,'tas_files.h']]],
+  ['filewritecstr_34',['fileWriteCStr',['../tas__files_8h.html#a10d565c52bae8962220b4a68b4c924c1',1,'tas_files.h']]],
+  ['filewritestr_35',['fileWriteStr',['../tas__files_8h.html#a9d0f64b5fa43e3ad7cb5f4f37a4a97a2',1,'tas_files.h']]]
 ];
