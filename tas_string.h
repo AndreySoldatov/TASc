@@ -69,6 +69,10 @@ void strPrint(Str str) {
     printf("%s", str.data);
 }
 
+void strPrintln(Str str) {
+    printf("%s\n", str.data);
+}
+
 /**
  * return constant pointer to the string data (const char *)
 */
@@ -194,7 +198,7 @@ bool strCompareCStr(Str str1, char const *str2) {
  */
 bool strEndsWith(Str str1, Str str2) {
     if(str2.length > str1.length) {
-        error_exit("strEndsWith error: str2 > str1")
+        return false;
     }
     Str sub = strSub(str1, str1.length - str2.length, str1.length);
     bool res = strCompare(sub, str2);
@@ -370,6 +374,30 @@ StrVec strSplit(Str str, char del) {
     }
 
     return res;
+}
+
+/**
+ * @brief Convert ASCII string to lowercase
+ * 
+ */
+void strToLowerCase(Str * str) {
+    for (size_t i = 0; i < str->length; i++) {
+        if(str->data[i] >= 'A' && str->data[i] <= 'Z') {
+            str->data[i] += (char)32;
+        }
+    }
+}
+
+/**
+ * @brief Convert ASCII string to uppercase
+ * 
+ */
+void strToUpperCase(Str * str) {
+    for (size_t i = 0; i < str->length; i++) {
+        if(str->data[i] >= 'a' && str->data[i] <= 'z') {
+            str->data[i] -= (char)32;
+        }
+    }
 }
 
 /**

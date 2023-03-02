@@ -1,9 +1,3 @@
-### To check documentation:
-1. clone
-2. open docs/index.html
-
-*isn't it beautiful?*
-``` c
 #include "tas_string.h"
 #include "tas_vector.h"
 
@@ -25,4 +19,3 @@ int main() {
     vecDelete_Str(&v);
     return 0;
 }
-```
