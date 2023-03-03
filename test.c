@@ -1,21 +1,24 @@
 #include "tas_string.h"
 #include "tas_vector.h"
+#include "tas_unorderedmap.h"
 
-VEC(Str)
-
-void printStr(Str str, size_t i) {
-    printf("%lu: ", i);
-    strPrintln(str);
+bool equals(int lhs, int rhs) {
+    return lhs == rhs;
 }
 
-void deleteStrElem(Str * s, size_t i) {
-    strDelete(s);
+UNORDERED_MAP(int, char)
+
+void printPair(int k, char v) {
+    printf("%d: %c\n", k, v);
 }
 
 int main() {
-    Vec_Str v = vecFrom_Str(2, strNew("Hello World"), strNew("And Github"));
-    vecforEach_Str(v, &printStr);
-    vecTransformPointer_Str(v, &deleteStrElem);
-    vecDelete_Str(&v);
-    return 0;
+    uMap_int_char m = uMapFrom_int_char(4, 
+        pairFrom_int_char(1, 'x'),
+        pairFrom_int_char(2, 'y'),
+        pairFrom_int_char(3, 'z'),
+        pairFrom_int_char(1, 'a')
+    );
+    uMapForeach_int_char(m, &printPair);
+    uMapDelete_int_char(&m);    
 }

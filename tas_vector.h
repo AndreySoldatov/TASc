@@ -4,9 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include "tas_commonmacro.h"
 
-#define BLOCK_SIZE 32
-#define TYPE_SUFFIX(N, T) N ## T
 #define VecName(T) TYPE_SUFFIX(Vec_, T)
 
 #define VEC(T) typedef struct VecName(T) { \
@@ -50,7 +49,7 @@ void TYPE_SUFFIX(vecClear_, T)(VecName(T) * v) { \
     TYPE_SUFFIX(vecDelete_, T)(v); \
     *v = TYPE_SUFFIX(vecNew_, T)(); \
 } \
-void TYPE_SUFFIX(vecforEach_, T)(VecName(T) v, void (*func)(T, size_t)) { \
+void TYPE_SUFFIX(vecForeach_, T)(VecName(T) v, void (*func)(T, size_t)) { \
     for (size_t i = 0; i < v.length; i++) (*func)(v.data[i], i); \
 } \
 void TYPE_SUFFIX(vecTransform_, T)(VecName(T) v, T (*func)(T, size_t)) { \
@@ -75,7 +74,5 @@ VecName(T) TYPE_SUFFIX(vecFrom_, T)(int size, ...) { \
 void TYPE_SUFFIX(vecAppend_, T)(VecName(T) * lhs, VecName(T) rhs) { \
     for (size_t i = 0; i < rhs.length; i++) TYPE_SUFFIX(vecPush_, T)(lhs, rhs.data[i]); \
 } \
-
-VEC(int)
 
 #endif
