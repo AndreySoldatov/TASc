@@ -1,6 +1,7 @@
 #ifndef TAS_UNORDEREDMAP
 #define TAS_UNORDEREDMAP
 
+#include <math.h>
 #include "tas_commonmacro.h"
 #include "tas_vector.h"
 
@@ -36,7 +37,7 @@ void PAIR_SUFFIX(uMapDelete, T1, T2)(MAP_NAME(T1, T2) * map) { \
 } \
 T2 * PAIR_SUFFIX(uMapAt, T1, T2)(MAP_NAME(T1, T2) map, T1 key) { \
     for (size_t i = 0; i < map.elements.length; i++) { \
-        if(equals(map.elements.data[i].v0, key)) { \
+        if(equals_ ## T1(map.elements.data[i].v0, key)) { \
             return &map.elements.data[i].v1; \
         } \
     } \
@@ -44,7 +45,7 @@ T2 * PAIR_SUFFIX(uMapAt, T1, T2)(MAP_NAME(T1, T2) map, T1 key) { \
 } \
 bool PAIR_SUFFIX(uMapContains, T1, T2)(MAP_NAME(T1, T2) map, T1 key) { \
     for (size_t i = 0; i < map.elements.length; i++) { \
-        if(equals(map.elements.data[i].v0, key)) { \
+        if(equals_ ## T1(map.elements.data[i].v0, key)) { \
             return true; \
         } \
     } \
@@ -76,5 +77,27 @@ void PAIR_SUFFIX(uMapForeach, T1, T2)(MAP_NAME(T1, T2) map, void (*func)(T1, T2)
     for (size_t i = 0; i < map.elements.length; i++) \
         (*func)(map.elements.data[i].v0, map.elements.data[i].v1); \
 } \
+void PAIR_SUFFIX(uMapTransformReference, T1, T2)(MAP_NAME(T1, T2) * map, void (*func)(T1 *, T2)) { \
+    for (size_t i = 0; i < map->elements.length; i++) \
+        (*func)(&map->elements.data[i].v0, map->elements.data[i].v1); \
+} \
+
+#define EQUALS(T) bool equals_ ## T(T lhs, T rhs) { \
+    return lhs == rhs; \
+} \
+
+EQUALS(int)
+EQUALS(char)
+EQUALS(size_t)
+
+#define EPS 0.0001
+
+bool equals_float(float lhs, float rhs) {
+    return (abs(rhs - lhs) < EPS);
+}
+
+bool equals_double(double lhs, double rhs) {
+    return (abs(rhs - lhs) < EPS);
+}
 
 #endif

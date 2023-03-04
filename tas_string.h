@@ -333,6 +333,11 @@ bool strVecContanins(StrVec v, char const *str) {
     return res;
 }
 
+void strClear(Str * str) {
+    strDelete(str);
+    *str = strNew("");
+}
+
 /**
  * Split string using delimiter and return result as StrVec
  * The source string remains untouched
