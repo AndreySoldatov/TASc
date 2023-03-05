@@ -23,7 +23,10 @@
  * 
  */
 
+#include "tas_vector.h"
 #include "tas_bytebuffer.h"
+#include "tas_commonmacro.h"
+#include "tas_debugalloc.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -35,6 +38,7 @@
 typedef struct Str {
     char * data;
     size_t length;
+    size_t capacity;
 } Str;
 
 /**
@@ -46,7 +50,8 @@ typedef struct Str {
 Str strNew(char const * source) {
     Str res;
     res.length = strlen(source);
-    res.data = (char *)malloc(res.length + 1);
+    res.capacity = ((res.length + 1) - ((res.length + 1) % BLOCK_SIZE)) + BLOCK_SIZE;
+    res.data = (char *)malloc(res.capacity);
     if(res.data == NULL) {
         error_exit("StrNew error: Cannot allocate memory for str\n")
     }
@@ -59,6 +64,7 @@ Str strNew(char const * source) {
 */
 void strDelete(Str *str) {
     str->length = 0;
+    str->capacity = 0;
     free(str->data);
 }
 
@@ -94,13 +100,25 @@ size_t strLength(Str str) {
     return str.length;
 }
 
+void strRequestNewCap(Str * str, size_t newCap) {
+    if(newCap > str->capacity) {
+        str->capacity = (newCap - (newCap % BLOCK_SIZE)) + BLOCK_SIZE;
+        str->data = (char *)realloc(str->data, str->capacity);
+    } else if(newCap < str->capacity - BLOCK_SIZE) {
+        str->capacity = (newCap - (newCap % BLOCK_SIZE)) + BLOCK_SIZE;
+        str->data = (char *)realloc(str->data, str->capacity);
+    }
+    if(str->data == NULL) {
+        error_exit("StrPush error: Cannot Reallocate memory for str\n")
+    }
+}
+
 /**
  * Push one character to the back of the string
 */
 Str * strPush(Str *str, char c) {
-    str->data = (char *)realloc(str->data, str->length + 2);
-    if(str->data == NULL) {
-        error_exit("StrPush error: Cannot reallocate memory for str\n")
+    if(str->length + 2 > str->capacity) {
+        strRequestNewCap(str, str->length + 2);
     }
     str->data[str->length] = c;
     str->data[str->length + 1] = '\0';
@@ -113,9 +131,8 @@ Str * strPush(Str *str, char c) {
 */
 Str * strAppendCStr(Str *dest, char const * source) {
     size_t source_len = strlen(source);
-    dest->data = (char *)realloc(dest->data, dest->length + source_len + 1);
-    if(dest->data == NULL) {
-        error_exit("StrAppendCStr error: Cannot reallocate memory for str\n")
+    if(dest->length + source_len + 1 > dest->capacity) {
+        strRequestNewCap(dest, dest->length + source_len + 1);
     }
     strcpy(dest->data + dest->length, source);
 
@@ -133,9 +150,9 @@ Str * strAppend(Str *dest, Str source) {
 
 Str strSub(Str str, size_t first, size_t last) {
     if(first <= last && last - first <= str.length) {
-        Str res;
+        Str res = strNew("");
         res.length = last - first;
-        res.data = (char *)malloc(res.length + 1);
+        strRequestNewCap(&res, last - first + 1);
         memcpy(res.data, str.data + first, res.length);
         res.data[res.length] = '\0';
         return res;
@@ -370,7 +387,7 @@ StrVec strSplit(Str str, char del) {
         
         res.data = (Str *)realloc(res.data, (res.length + 1) * sizeof(Str));
         if(res.data == NULL) {
-            error_exit("strSplit error: Cannot reallocate memory for StrVec element");
+            error_exit("strSplit error: Cannot debugReallocate memory for StrVec element");
         }
         res.data[res.length] = strSub(str, start_index, end_index);
         res.length++;
@@ -415,6 +432,16 @@ ByteBuffer strToByteBuffer(Str str) {
     b.data = (Byte *)str.data;
     b.length = str.length;
     return b;
+}
+
+Str strFiltered(Str str, bool (*pred)(char)) {
+    Str res = strNew("");
+    for (size_t i = 0; i < str.length; i++) {
+        if(!(*pred)(str.data[i])) {
+            strPush(&res, str.data[i]);
+        }
+    }
+    return res;
 }
 
 #endif

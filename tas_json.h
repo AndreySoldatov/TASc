@@ -287,4 +287,72 @@ Str jsonToString(JsonObject obj, char * del) {
     return res;
 }
 
+bool isWhitespace(char c) {
+    return c == ' ' || c == '\n' || c == '\t' || c == (char)13;
+}
+
+JsonValue jsonParseValue(Str str, size_t start_index, size_t * end_index) {
+    if(workString.data[cursor_start] == '\"') { // STRING
+        if(strFindFirsOf(workString, '\"', cursor_start + 1) == STR_BAD_INDEX) {
+            error_exit("jsonParseValue error: no closing quote on string\n");
+        }
+        Str val = strSub(workString, cursor_start, strFindFirsOf(workString, '\"', cursor_start + 1));
+        printf("value string: "); strPrintln(val);
+        JsonValue res = jsonValFromStr(val.data);
+        strDelete(val);
+        return res;
+    } else if(workString.data[cursor_start] == 'n') { // NULL
+        //FIXME: Want to sleep
+        Str nullStr = 
+        if()
+    } else if(workString.data[cursor_start] == 't') { // TRUE
+        //TODO: TRUE
+    } else if(workString.data[cursor_start] == 'f') { // FALSE
+        //TODO: FALSE
+    } else if(
+        workString.data[cursor_start] == '-' || 
+        isDigit(workString.data[cursor_start])) { // NUMBER
+        //TODO: NUMBER
+    } else if(workString.data[cursor_start] == '{') { // OBJECT
+        //TODO: OBJECT
+    } else if(workString.data[cursor_start] == '[') { // ARRAY
+        //TODO: ARRAY
+    } else {
+        error_exit("jsonParseValue error: Json is not valid: unknown data type\n");
+    }
+}
+
+JsonObject jsonFromString(Str str) {
+    Str workString = strFiltered(str, &isWhitespace);
+    strPrintln(workString);
+    
+    if(workString.data[0] != '{' || workString.data[workString.length - 1] != '}') {
+        error_exit("jsonFromString error: Json is not valid: no opening or closing bracket\n");
+    }
+    
+    JsonObject res = uMapNew_Str_JsonValue();
+    
+    size_t cursor_start = 1;
+    if(workString.data[cursor_start] == '}') {
+        return res;
+    }
+
+    while(true) {
+        if(workString.data[cursor_start] != '\"') {
+            error_exit("jsonFromString error: Json is not valid: expected key of type string\n");
+        }
+
+        Str key = strSub(workString, cursor_start, strFindFirsOf(workString, '\"', cursor_start + 1));
+        printf("Key: "); strPrintln(key);
+        
+        cursor_start = strFindFirsOf(workString, '\"', cursor_start) + 1;
+        if(workString.data[cursor_start] != ':') {
+            error_exit("jsonFromString error: Json is not valid: expected \":\"\n");
+        }
+        
+        cursor_start++;
+    }
+    strDelete(&workString);
+}
+
 #endif
