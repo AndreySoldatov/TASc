@@ -67,28 +67,6 @@ JsonValue jsonValFromStr(char * str) {
     return res;
 }
 
-JsonValue jsonValFromArray(struct JsonArray * arr) {
-    JsonValue res;
-    res.jsonArray = arr;
-    res.jsonObject = NULL;
-    res.jsonBool = false;
-    res.jsonNumber = 0.0;
-    res.jsonStr = strNew("");
-    res.jsonType = JSON_ARRAY;
-    return res;
-}
-
-JsonValue jsonValFromObject(struct JsonObject * obj) {
-    JsonValue res;
-    res.jsonArray = NULL;
-    res.jsonObject = obj;
-    res.jsonBool = false;
-    res.jsonNumber = 0.0;
-    res.jsonStr = strNew("");
-    res.jsonType = JSON_OBJECT;
-    return res;
-}
-
 bool equals_Str(Str str1, Str str2) {
     return strCompare(str1, str2);
 }
@@ -100,6 +78,28 @@ typedef uMap_Str_JsonValue JsonObject;
 VEC(JsonValue)
 
 typedef Vec_JsonValue JsonArray;
+
+JsonValue jsonValFromArray(JsonArray * arr) {
+    JsonValue res;
+    res.jsonArray = (struct JsonArray *)arr;
+    res.jsonObject = NULL;
+    res.jsonBool = false;
+    res.jsonNumber = 0.0;
+    res.jsonStr = strNew("");
+    res.jsonType = JSON_ARRAY;
+    return res;
+}
+
+JsonValue jsonValFromObject(JsonObject * obj) {
+    JsonValue res;
+    res.jsonArray = NULL;
+    res.jsonObject = (struct JsonObject *)obj;
+    res.jsonBool = false;
+    res.jsonNumber = 0.0;
+    res.jsonStr = strNew("");
+    res.jsonType = JSON_OBJECT;
+    return res;
+}
 
 void jsonDelete(JsonObject * obj);
 void jsonArrDelete(JsonArray * arr);
@@ -127,46 +127,164 @@ void jsonArrDelete(JsonArray * arr) {
     vecDelete_JsonValue(arr);
 }
 
+void jsonDumpValueIndex(JsonValue val, char * del, size_t index);
+
+void jsonDumpIndex(JsonObject obj, char * del, size_t index);
+
+void jsonDumpArrayIndex(JsonArray arr, char * del, size_t index) {
+    for(int i = 0; i < index; i++) printf("%s", del);
+    printf("[\n");
+    
+    for (size_t i = 0; i < arr.length; i++){
+        for(int i = 0; i < index + 1; i++) printf("%s", del);
+        
+        jsonDumpValueIndex(arr.data[i], del, index);
+
+        if(i < arr.length - 1)
+            printf(",");
+        printf("\n");
+    }
+
+    for(int i = 0; i < index; i++) printf("%s", del);
+    printf("]");
+}
+
 void jsonDumpIndex(JsonObject obj, char * del, size_t index) {
     for(int i = 0; i < index; i++) printf("%s", del);
     printf("{\n");
     for (size_t i = 0; i < obj.elements.length; i++) {
-        for(int i = 0; i < index + 1; i++) printf("%s\"", del);
+        for(int i = 0; i < index + 1; i++) printf("%s", del);
+        printf("\"");
         strPrint(obj.elements.data[i].v0);
         printf("\": ");
 
-        /// JSON_VAL_PRINT
-        if(obj.elements.data[i].v1.jsonType == JSON_NULL)
-            printf("NULL");
-        if(obj.elements.data[i].v1.jsonType == JSON_NUMBER) 
-            printf("%f", obj.elements.data[i].v1.jsonNumber);
-        if(obj.elements.data[i].v1.jsonType == JSON_BOOL) {
-            if(obj.elements.data[i].v1.jsonBool) {
-                printf("true");
-            } else printf("false");
-        }
-        if(obj.elements.data[i].v1.jsonType == JSON_STRING) {
-            printf("\"");
-            strPrint(obj.elements.data[i].v1.jsonStr);
-            printf("\"");
-        }
-        if(obj.elements.data[i].v1.jsonType == JSON_OBJECT) {
-            jsonDumpIndex(obj, del, index + 1);
-        }
-        if(obj.elements.data[i].v1.jsonType == JSON_ARRAY) {
-            //TODO: dumpArrayIndex();
-            printf("Array");
-        }
-        /// JSON_VAL_PRINT
+        jsonDumpValueIndex(obj.elements.data[i].v1, del, index);
 
-        printf(",\n");
+        if(i < obj.elements.length - 1)
+            printf(",");
+        printf("\n");
     }
-    for(int i = 0; i < index; i++) printf("%s\n", del);
-    printf("{\n");
+    for(int i = 0; i < index; i++) printf("%s", del);
+    printf("}");
+}
+
+void jsonDumpValueIndex(JsonValue val, char * del, size_t index) {
+    if(val.jsonType == JSON_NULL)
+        printf("null");
+    if(val.jsonType == JSON_NUMBER) 
+        printf("%f", val.jsonNumber);
+    if(val.jsonType == JSON_BOOL) {
+        if(val.jsonBool) {
+            printf("true");
+        } else printf("false");
+    }
+    if(val.jsonType == JSON_STRING) {
+        printf("\"");
+        strPrint(val.jsonStr);
+        printf("\"");
+    }
+    if(val.jsonType == JSON_OBJECT) {
+        printf("\n");
+        jsonDumpIndex(*((JsonObject *)val.jsonObject), del, index + 1);
+    }
+    if(val.jsonType == JSON_ARRAY) {
+        printf("\n");
+        jsonDumpArrayIndex(*((JsonArray *)val.jsonArray), del, index + 1);
+    }
 }
 
 void jsonDump(JsonObject obj, char * del) {
     jsonDumpIndex(obj, del, 0);
+}
+
+Str jsonToStringValueIndex(JsonValue val, char * del, size_t index);
+
+Str jsonToStringArrayIndex(JsonArray arr, char * del, size_t index) {
+    Str res = strNew("");
+
+    for(int i = 0; i < index; i++) strAppendCStr(&res, del);
+    strAppendCStr(&res, "[\n");
+    for (size_t i = 0; i < arr.length; i++) {
+        for(int i = 0; i < index + 1; i++) strAppendCStr(&res, del);
+
+        Str tmp = jsonToStringValueIndex(arr.data[i], del, index);
+        strAppend(&res, tmp);
+        strDelete(&tmp);
+
+        if(i < arr.length - 1)
+            strPush(&res, ',');
+        strPush(&res, '\n');
+    }
+    for(int i = 0; i < index; i++) strAppendCStr(&res, del);
+    strPush(&res, ']');
+
+    return res;
+}
+
+Str jsonToStringIndex(JsonObject obj, char * del, size_t index) {
+    Str res = strNew("");
+
+    for(int i = 0; i < index; i++) strAppendCStr(&res, del);
+    strAppendCStr(&res, "{\n");
+    for (size_t i = 0; i < obj.elements.length; i++) {
+        for(int i = 0; i < index + 1; i++) strAppendCStr(&res, del);
+        strPush(&res, '\"');
+        strAppend(&res, obj.elements.data[i].v0);
+        strAppendCStr(&res, "\": ");
+
+        Str tmp = jsonToStringValueIndex(obj.elements.data[i].v1, del, index);
+        strAppend(&res, tmp);
+        strDelete(&tmp);
+
+        if(i < obj.elements.length - 1)
+            strPush(&res, ',');
+        strPush(&res, '\n');
+    }
+    for(int i = 0; i < index; i++) strAppendCStr(&res, del);
+    strPush(&res, '}');
+
+    return res;
+}
+
+Str jsonToStringValueIndex(JsonValue val, char * del, size_t index) {
+    Str res = strNew("");
+    
+    if(val.jsonType == JSON_NULL)
+        strAppendCStr(&res, "null");
+    if(val.jsonType == JSON_NUMBER) {
+        char buf[BLOCK_SIZE]; 
+        sprintf(buf, "%f", val.jsonNumber);
+        strAppendCStr(&res, buf);
+    }
+    if(val.jsonType == JSON_BOOL) {
+        if(val.jsonBool) {
+            strAppendCStr(&res, "true");
+        } else strAppendCStr(&res, "false");
+    }
+    if(val.jsonType == JSON_STRING) {
+        strPush(&res, '\"');
+        strAppend(&res, val.jsonStr);
+        strPush(&res, '\"');
+    }
+    if(val.jsonType == JSON_OBJECT) {
+        strPush(&res, '\n');
+        Str tmp = jsonToStringIndex(*((JsonObject *)val.jsonObject), del, index + 1);
+        strAppend(&res, tmp);
+        strDelete(&tmp);
+    }
+    if(val.jsonType == JSON_ARRAY) {
+        strPush(&res, '\n');
+        Str tmp = jsonToStringArrayIndex(*((JsonArray *)val.jsonArray), del, index + 1);
+        strAppend(&res, tmp);
+        strDelete(&tmp);
+    }
+
+    return res;
+}
+
+Str jsonToString(JsonObject obj, char * del) {
+    Str res = jsonToStringIndex(obj, del, 0);
+    return res;
 }
 
 #endif
