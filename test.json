@@ -1,0 +1,17 @@
+{
+    "PI": 3.141500,
+    "life": true,
+    "hello": "World",
+    "meaning_of_life": null,
+    "sub": 
+    {
+        "sub1": 3.141500,
+        "sub2": true,
+        "Arr": 
+        [
+            120.000000,
+            "I am number 130.000",
+            140.000000
+        ]
+    }
+}

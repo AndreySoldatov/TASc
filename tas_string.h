@@ -6,7 +6,6 @@
  * used in some functions as error handling mechanism
  * 
  */
-#define error_exit(msg) printf(msg); exit(1);
 
 /**
  * @brief macro that is used if searching functions failed

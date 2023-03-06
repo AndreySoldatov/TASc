@@ -79,9 +79,10 @@ VEC(JsonValue)
 
 typedef Vec_JsonValue JsonArray;
 
-JsonValue jsonValFromArray(JsonArray * arr) {
+JsonValue jsonValFromArray(JsonArray arr) {
     JsonValue res;
-    res.jsonArray = (struct JsonArray *)arr;
+    res.jsonArray = malloc(sizeof(JsonArray));
+    *((JsonArray *)res.jsonArray) = arr;
     res.jsonObject = NULL;
     res.jsonBool = false;
     res.jsonNumber = 0.0;
@@ -90,10 +91,11 @@ JsonValue jsonValFromArray(JsonArray * arr) {
     return res;
 }
 
-JsonValue jsonValFromObject(JsonObject * obj) {
+JsonValue jsonValFromObject(JsonObject obj) {
     JsonValue res;
     res.jsonArray = NULL;
-    res.jsonObject = (struct JsonObject *)obj;
+    res.jsonObject = malloc(sizeof(JsonObject));
+    *((JsonObject *)res.jsonObject) = obj;
     res.jsonBool = false;
     res.jsonNumber = 0.0;
     res.jsonStr = strNew("");
@@ -107,7 +109,9 @@ void jsonArrDelete(JsonArray * arr);
 void jsonValDelete(JsonValue * val) {
     strDelete(&val->jsonStr);
     jsonDelete((JsonObject *)val->jsonObject);
+    free(val->jsonObject);
     jsonArrDelete((JsonArray *)val->jsonArray);
+    free(val->jsonArray);
 }
 
 void jsonDelete(JsonObject * obj) {
@@ -291,40 +295,174 @@ bool isWhitespace(char c) {
     return c == ' ' || c == '\n' || c == '\t' || c == (char)13;
 }
 
+Str smartFiltered(Str str) {
+    Str res = strNew("");
+    bool canFilter = true;
+    for (size_t i = 0; i < str.length; i++) {
+        if(str.data[i] == '"') {
+            canFilter = !canFilter;
+        }
+
+        if(!isWhitespace(str.data[i])) {
+            strPush(&res, str.data[i]);
+        } else {
+            if(!canFilter) {
+                strPush(&res, str.data[i]);
+            }
+        }
+    }
+    return res;
+}
+
+bool isDigit(char c) {
+    return (c >= '0' && c <= '9') || c == '.' || c == 'e' || c == 'E';
+}
+
+size_t findAdjacentCurvyIndex(Str str, size_t start_index) {
+    int brack_count = 0;
+    for (size_t i = start_index; i < str.length; i++) {
+        if(str.data[i] == '{') {
+            brack_count++;
+        }
+        if(str.data[i] == '}') {
+            brack_count--;
+            if(brack_count == 0) {
+                return i;
+            }
+        }
+    }
+    return STR_BAD_INDEX;
+}
+
+size_t findAdjacentSquareIndex(Str str, size_t start_index) {
+    int brack_count = 0;
+    for (size_t i = start_index; i < str.length; i++) {
+        if(str.data[i] == '[') {
+            brack_count++;
+        }
+        if(str.data[i] == ']') {
+            brack_count--;
+            if(brack_count == 0) {
+                return i;
+            }
+        }
+    }
+    return STR_BAD_INDEX;
+}
+
+JsonValue jsonParseValue(Str str, size_t start_index, size_t * end_index);
+JsonObject jsonFromString(Str str);
+
+JsonArray jsonArrayFromString(Str str) {
+    if(str.data[0] != '[' || str.data[str.length - 1] != ']') {
+        error_exit("jsonArrayFromString error: Json Arrayis not valid: no opening or closing bracket\n");
+    }
+    size_t start_index = 1;
+    size_t end_index = 1;
+    
+    JsonArray res = vecNew_JsonValue();
+    
+    while(true) {
+        JsonValue tmp = jsonParseValue(str, start_index, &end_index);
+
+        vecPush_JsonValue(&res, tmp);
+
+        start_index = end_index;
+        if(str.data[start_index] == ',') {
+            start_index++;
+            continue;
+        } else if(str.data[start_index] == ']') {
+            break;
+        } else {
+            error_exit("jsonFromString error: unknown character\n");
+        }
+    }
+
+    return res;
+}
+
 JsonValue jsonParseValue(Str str, size_t start_index, size_t * end_index) {
-    if(workString.data[cursor_start] == '\"') { // STRING
-        if(strFindFirsOf(workString, '\"', cursor_start + 1) == STR_BAD_INDEX) {
+    if(str.data[start_index] == '\"') { // STRING
+        if(strFindFirsOf(str, '\"', start_index + 1) == STR_BAD_INDEX) {
             error_exit("jsonParseValue error: no closing quote on string\n");
         }
-        Str val = strSub(workString, cursor_start, strFindFirsOf(workString, '\"', cursor_start + 1));
-        printf("value string: "); strPrintln(val);
+        Str val = strSub(str, start_index + 1, strFindFirsOf(str, '\"', start_index + 1));
+        //printf("value string: "); strPrintln(val);
         JsonValue res = jsonValFromStr(val.data);
-        strDelete(val);
+        strDelete(&val);
+        *end_index = strFindFirsOf(str, '\"', start_index + 1) + 1;
         return res;
-    } else if(workString.data[cursor_start] == 'n') { // NULL
-        //FIXME: Want to sleep
-        Str nullStr = 
-        if()
-    } else if(workString.data[cursor_start] == 't') { // TRUE
-        //TODO: TRUE
-    } else if(workString.data[cursor_start] == 'f') { // FALSE
-        //TODO: FALSE
+    } else if(str.data[start_index] == 'n') { // NULL
+        if(str.length < start_index + 4) {
+            error_exit("jsonParseValue error: null init is not complete\n");
+        }
+        Str nullStr = strSub(str, start_index, start_index + 4);
+        if(strCompareCStr(nullStr, "null")) {
+            strDelete(&nullStr);
+            *end_index = start_index + 4;
+            return jsonValFromNull();
+        } else {
+            error_exit("jsonParseValue error: incorrect null init\n");
+        }
+    } else if(str.data[start_index] == 't') { // TRUE
+        if(str.length < start_index + 4) {
+            error_exit("jsonParseValue error: true init is not complete\n");
+        }
+        Str trueStr = strSub(str, start_index, start_index + 4);
+        if(strCompareCStr(trueStr, "true")) {
+            strDelete(&trueStr);
+            *end_index = start_index + 4;
+            return jsonValFromBool(true);
+        } else {
+            error_exit("jsonParseValue error: incorrect true init\n");
+        }
+    } else if(str.data[start_index] == 'f') { // FALSE
+        if(str.length < start_index + 5) {
+            error_exit("jsonParseValue error: false init is not complete\n");
+        }
+        Str falseStr = strSub(str, start_index, start_index + 5);
+        if(strCompareCStr(falseStr, "false")) {
+            strDelete(&falseStr);
+            *end_index = start_index + 5;
+            return jsonValFromBool(false);
+        } else {
+            error_exit("jsonParseValue error: incorrect false init\n");
+        }
     } else if(
-        workString.data[cursor_start] == '-' || 
-        isDigit(workString.data[cursor_start])) { // NUMBER
-        //TODO: NUMBER
-    } else if(workString.data[cursor_start] == '{') { // OBJECT
-        //TODO: OBJECT
-    } else if(workString.data[cursor_start] == '[') { // ARRAY
-        //TODO: ARRAY
-    } else {
-        error_exit("jsonParseValue error: Json is not valid: unknown data type\n");
+        str.data[start_index] == '-' || 
+        isDigit(str.data[start_index])) { // NUMBER
+        size_t end_idx = start_index + 1;
+        
+        while(isDigit(str.data[end_idx])) {
+            end_idx++;
+        }
+
+        Str numStr = strSub(str, start_index, end_idx);
+        double val = strtod(numStr.data, NULL);
+        *end_index = end_idx;
+        strDelete(&numStr);
+        return jsonValFromNumber(val);
+    } else if(str.data[start_index] == '{') { // OBJECT
+        *end_index = findAdjacentCurvyIndex(str, start_index);
+        Str objSub = strSub(str, start_index, *end_index + 1);
+        *end_index = *end_index + 1;
+        JsonObject obj = jsonFromString(objSub);
+        strDelete(&objSub);
+        return jsonValFromObject(obj);
+    } else if(str.data[start_index] == '[') { // ARRAY
+        *end_index = findAdjacentSquareIndex(str, start_index);
+        Str arrSub = strSub(str, start_index, *end_index + 1);
+        *end_index = *end_index + 1;
+        JsonArray arr = jsonArrayFromString(arrSub);
+        strDelete(&arrSub);
+        return jsonValFromArray(arr);
     }
+    
+    error_exit("jsonParseValue error: Json is not valid: unknown data type\n");
 }
 
 JsonObject jsonFromString(Str str) {
-    Str workString = strFiltered(str, &isWhitespace);
-    strPrintln(workString);
+    Str workString = smartFiltered(str);
     
     if(workString.data[0] != '{' || workString.data[workString.length - 1] != '}') {
         error_exit("jsonFromString error: Json is not valid: no opening or closing bracket\n");
@@ -333,6 +471,8 @@ JsonObject jsonFromString(Str str) {
     JsonObject res = uMapNew_Str_JsonValue();
     
     size_t cursor_start = 1;
+    size_t cursor_end = 1;
+
     if(workString.data[cursor_start] == '}') {
         return res;
     }
@@ -342,17 +482,34 @@ JsonObject jsonFromString(Str str) {
             error_exit("jsonFromString error: Json is not valid: expected key of type string\n");
         }
 
-        Str key = strSub(workString, cursor_start, strFindFirsOf(workString, '\"', cursor_start + 1));
-        printf("Key: "); strPrintln(key);
+        Str key = strSub(workString, cursor_start + 1, strFindFirsOf(workString, '\"', cursor_start + 1));
         
-        cursor_start = strFindFirsOf(workString, '\"', cursor_start) + 1;
+        cursor_start = strFindFirsOf(workString, '\"', cursor_start + 1) + 1;
+
         if(workString.data[cursor_start] != ':') {
             error_exit("jsonFromString error: Json is not valid: expected \":\"\n");
         }
         
         cursor_start++;
+
+        JsonValue val = jsonParseValue(workString, cursor_start, &cursor_end);
+
+        uMapSet_Str_JsonValue(&res, key, val);
+
+        cursor_start = cursor_end;
+
+        if(workString.data[cursor_start] == ',') {
+            cursor_start++;
+            continue;
+        } else if(workString.data[cursor_start] == '}') {
+            break;
+        } else {
+            error_exit("jsonFromString error: unknown character\n");
+        }
     }
     strDelete(&workString);
+
+    return res;
 }
 
 #endif
