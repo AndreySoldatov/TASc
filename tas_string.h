@@ -428,9 +428,23 @@ void strToUpperCase(Str * str) {
  */
 ByteBuffer strToByteBuffer(Str str) {
     ByteBuffer b;
-    b.data = (Byte *)str.data;
+    // b.data = (Byte *)str.data;
     b.length = str.length;
+    b.data = malloc(b.length);
+    memcpy(b.data, str.data, b.length);
+
     return b;
+}
+
+Str strFromByteBuffer(ByteBuffer bb) {
+    Str res = strNew("");
+
+    strRequestNewCap(&res, bb.length + 1);
+    res.length = bb.length;
+    memcpy(res.data, bb.data, res.length);
+    res.data[res.length] = '\0';
+
+    return res;
 }
 
 Str strFiltered(Str str, bool (*pred)(char)) {
@@ -441,6 +455,10 @@ Str strFiltered(Str str, bool (*pred)(char)) {
         }
     }
     return res;
+}
+
+bool isWhitespace(char c) {
+    return c == ' ' || c == '\n' || c == '\t' || c == (char)13;
 }
 
 #endif

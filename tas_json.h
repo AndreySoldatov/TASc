@@ -5,6 +5,13 @@
 #include "tas_unorderedmap.h"
 #include "tas_vector.h"
 
+//TODO: 1. Make some kind of "after decimal" global variable that will determine how much numbers after decima will
+// be written when printing or storing in Str
+
+//FIXME: Remake json logic json document being jsonValue, not jsonObject
+
+//FIXME: 1. impliment string formatting with \ escape codes support
+
 typedef enum JsonValType {
     JSON_NULL,
     JSON_OBJECT,
@@ -289,10 +296,6 @@ Str jsonToStringValueIndex(JsonValue val, char * del, size_t index) {
 Str jsonToString(JsonObject obj, char * del) {
     Str res = jsonToStringIndex(obj, del, 0);
     return res;
-}
-
-bool isWhitespace(char c) {
-    return c == ' ' || c == '\n' || c == '\t' || c == (char)13;
 }
 
 Str smartFiltered(Str str) {
