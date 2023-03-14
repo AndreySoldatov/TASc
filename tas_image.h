@@ -1,5 +1,5 @@
-#ifndef TAS_BMP
-#define TAS_BMP
+#ifndef TAS_IMAGE
+#define TAS_IMAGE
 
 #include "tas_string.h"
 #include "tas_files.h"
@@ -7,6 +7,7 @@
 #include "tas_commonmacro.h"
 
 #define index(w, x, y) (w * y + x)
+#define coord(i, w) (i % w), (i / w)
 
 typedef struct Color {
     Byte r;
@@ -130,6 +131,7 @@ Img imageFromFile(char * path) {
 
 void imageToFile(Img image, char * path) {
     Str fileContent = strNew("P6\n# This file was automatically created by tas_image lib\n");
+    strRequestNewCap(&fileContent, image.pixels.length * 3 + BLOCK_SIZE);
     char buffer[16];
     sprintf(buffer, "%lu", image.width);
     strAppendCStr(&fileContent, buffer);
@@ -138,7 +140,7 @@ void imageToFile(Img image, char * path) {
     strAppendCStr(&fileContent, buffer);
     strAppendCStr(&fileContent, "\n255\n");
 
-    for (size_t i = 0; i < image.width * image.height; i++) {
+    for (size_t i = 0; i < image.pixels.length; i++) {
         strPush(&fileContent, image.pixels.data[i].r);
         strPush(&fileContent, image.pixels.data[i].g);
         strPush(&fileContent, image.pixels.data[i].b);
@@ -206,6 +208,30 @@ void imageConvolute3x3(Img * img, Color (*func)(Color[])) {
     img->pixels = res.pixels;
     img->width = res.width;
     img->height = res.height;
+}
+
+Color imageConvolutePixel3x3(Img img, size_t x, size_t y, Color (*func)(Color[])) {
+    if(x >= img.width || y >= img.height) {
+        // error_exit("imageConvolutePixel3x3 error: out of bounds\n");
+        printf("(%lu, %lu)\n", x, y);
+        exit(1);
+    }
+
+    Color kernel[9] = {
+        imageAt(img, (x-1) % img.width, (y-1) % img.height), 
+        imageAt(img, x, (y-1) % img.height),
+        imageAt(img, (x+1) % img.width, (y-1) % img.height),
+
+        imageAt(img, (x-1) % img.width, y), 
+        imageAt(img, x, y),
+        imageAt(img, (x+1) % img.width, y),
+
+        imageAt(img, (x-1) % img.width, (y+1) % img.height), 
+        imageAt(img, x, (y+1) % img.height),
+        imageAt(img, (x+1) % img.width, (y+1) % img.height)
+    };
+
+    return (*func)(kernel);
 }
 
 Color colorGrayScale(Color c, size_t x, size_t y) {

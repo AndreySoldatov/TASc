@@ -33,6 +33,7 @@ Str fileReadToStr(char const *path) {
     res.length = fsize;
 
     res.data = (char *)malloc(fsize + 1);
+    // strRequestNewCap(&res, fsize + 1);
     fread(res.data, fsize, 1, fp);
     fclose(fp);
     res.data[fsize] = 0;

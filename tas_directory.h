@@ -143,4 +143,10 @@ void dirCreate(char const * path, size_t permissions) {
     mkdir(path, permissions);
 }
 
+bool isDir(char * path) {
+    struct stat stats;
+    stat(path, &stats);
+    return S_ISDIR(stats.st_mode);
+}
+
 #endif
