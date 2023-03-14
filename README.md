@@ -2,6 +2,8 @@
 1. clone
 2. open docs/index.html
 
+### Example program
+
 ``` c
 #include "tas_threads.h"
 #include "tas_string.h"
