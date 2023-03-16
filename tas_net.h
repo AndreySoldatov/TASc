@@ -3,4 +3,8 @@
 
 //TODO: well... everything
 
+typedef struct Socket {
+
+} Socket;
+
 #endif
