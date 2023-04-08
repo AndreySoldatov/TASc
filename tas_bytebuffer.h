@@ -31,4 +31,12 @@ void byteBufferDelete(ByteBuffer *b) {
     free(b->data);
 }
 
+// #include "tas_debugalloc.h"
+
+// void byteBufferAppend(ByteBuffer *b, void * data, size_t length) {
+//     b->data = debugRealloc(b->data, b->length + length);
+//     memcpy(b->data + b->length, data, length);
+//     b->length += length;
+// }
+
 #endif

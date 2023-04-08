@@ -7,6 +7,8 @@
 
 //FIXME: 1. impliment string formatting with \ escape codes support
 
+// TODO: Impliment JsonValue through a union
+
 size_t JSON_DECIMAL_DIGITS = 3;
 
 typedef enum JsonValType {

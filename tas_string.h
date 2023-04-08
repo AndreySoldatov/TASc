@@ -430,7 +430,7 @@ ByteBuffer strToByteBuffer(Str str) {
     ByteBuffer b;
     // b.data = (Byte *)str.data;
     b.length = str.length;
-    b.data = malloc(b.length);
+    b.data = (Byte *)malloc(b.length);
     memcpy(b.data, str.data, b.length);
 
     return b;
