@@ -1,37 +1,11 @@
 #include "tas_bigint.h"
 
 int main() {
-    Vec_char c = vecNew_char();
-    vecPush_char(&c, 'a');
-    vecPush_char(&c, 'b');
-    vecPush_char(&c, 'd');
-    vecPush_char(&c, 'e');
+    BigInt b = bigIntFromString("64452");
+    BigInt b1 = bigIntFromString("64452");
 
-    for (size_t i = 0; i < c.length; i++) {
-        printf("%c, ", c.data[i]);
-    }
-    printf("\n");
+    bigIntMult(&b, b1);
 
-    printf("%d\n", c.length);
-    
-    vecInsertOne_char(&c, 'c', 2);
-    vecInsertOne_char(&c, '0', 0);
-
-    for (size_t i = 0; i < c.length; i++) {
-        printf("%c, ", c.data[i]);
-    }
-    printf("\n");
-
-    Vec_char c1 = vecNew_char();
-    vecPush_char(&c1, 'h');
-    vecPush_char(&c1, 'e');
-    vecPush_char(&c1, 'l');
-    vecPush_char(&c1, 'l');
-
-    vecInsertSome_char(&c, c1, 1);
-
-    for (size_t i = 0; i < c.length; i++) {
-        printf("%c, ", c.data[i]);
-    }
+    bigIntPrint(b); // 4154060304
     printf("\n");
 }

@@ -20,6 +20,10 @@ BigInt bigIntNew() {
     return b;
 }
 
+void bigIntDelete(BigInt *b) {
+    vecDelete_char(&b->data);
+}
+
 BigInt bigIntFromString(char const * str) {
     BigInt b = bigIntNew();
 
@@ -43,6 +47,17 @@ BigInt bigIntFromInt(int n) {
     }
 
     return b;
+}
+
+BigInt bigIntCopy(BigInt b) {
+    BigInt res = bigIntNew();
+    requestNewCap_char(&res.data, b.data.length);
+    
+    for (size_t i = 0; i < b.data.length; i++) {
+        vecPush_char(&res.data, b.data.data[i]);
+    }
+
+    return res;
 }
 
 Str bigIntToString(BigInt b) {
@@ -177,12 +192,48 @@ void bigIntSub(BigInt *lhs, BigInt rhs) {
     }
 }
 
-void bigIntMult(BigInt * lhs, BigInt rhs) {
-    
+void bigIntMultD(BigInt *lhs, char rhs) {
+    if(rhs == 0) {
+        bigIntDelete(lhs);
+        *lhs = bigIntFromString("0");
+    }
+    char carry = 0;
+    for (size_t i = 0; i < lhs->data.length; i++) {
+        char mult = lhs->data.data[i] * rhs + carry;
+        lhs->data.data[i] = mult % 10;
+        carry = mult / 10;
+    }
+    if(carry) {
+        vecPush_char(&lhs->data, carry);
+    }
 }
 
-void bigIntDelete(BigInt *b) {
-    vecDelete_char(&b->data);
+void bigIntShiftRight(BigInt *b, int shift) {
+    Vec_char tmp = vecNew_char();
+    requestNewCap_char(&tmp, shift);
+    
+    for (size_t i = 0; i < shift; i++) {
+        vecPush_char(&tmp, 0);
+    }
+    
+    vecInsertSome_char(&b->data, tmp, 0);
+
+    vecDelete_char(&tmp);
+}
+
+void bigIntMult(BigInt * lhs, BigInt rhs) {
+    BigInt res = bigIntNew();
+    for (size_t i = 0; i < rhs.data.length; i++) {
+        BigInt tmp = bigIntCopy(*lhs);
+        bigIntMultD(&tmp, rhs.data.data[i]);
+        bigIntShiftRight(&tmp, i);
+        bigIntAdd(&res, tmp);
+    }
+
+    bigIntDelete(lhs);
+    lhs->data.capacity = res.data.capacity;
+    lhs->data.length = res.data.length;
+    lhs->data.data = res.data.data;
 }
 
 #endif
