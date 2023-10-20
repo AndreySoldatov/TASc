@@ -81,16 +81,18 @@ void bigIntAdd(BigInt *lhs, BigInt rhs) {
         vecPush_char(&lhs->data, 0);
     }
     char carry = 0;
-    for (size_t i = 0; i < rhs.data.length; i++) {
-        char sum = lhs->data.data[i] + rhs.data.data[i] + carry;
+    for (size_t i = 0; i < lhs->data.length; i++) {
+        char sum;
+        if(i < rhs.data.length)
+            sum = lhs->data.data[i] + rhs.data.data[i] + carry;
+        else
+            sum = lhs->data.data[i] + carry;
+
         carry = sum / 10;
         lhs->data.data[i] = sum % 10;
     }
     if(carry) {
-        if(lhs->data.length > rhs.data.length)
-            lhs->data.data[rhs.data.length] += carry;
-        else
-            vecPush_char(&lhs->data, carry);
+        vecPush_char(&lhs->data, carry);
     }
 }
 
@@ -176,8 +178,12 @@ void bigIntSub(BigInt *lhs, BigInt rhs) {
 
     char debt = 0;
     char diff = 0;
-    for (size_t i = 0; i < rhs.data.length; i++) {
-        diff = lhs->data.data[i] - rhs.data.data[i] - debt;
+    for (size_t i = 0; i < lhs->data.length; i++) {
+        if(i < rhs.data.length)
+            diff = lhs->data.data[i] - rhs.data.data[i] - debt;
+        else
+            diff = lhs->data.data[i] - debt;
+        
         if(diff < 0) {
             debt = 1;
             diff += 10;
@@ -234,6 +240,19 @@ void bigIntMult(BigInt * lhs, BigInt rhs) {
     lhs->data.capacity = res.data.capacity;
     lhs->data.length = res.data.length;
     lhs->data.data = res.data.data;
+}
+
+void bigIntPower(BigInt * lhs, BigInt rhs) {
+    BigInt i = bigIntFromString("0");
+    BigInt u = bigIntFromString("1");
+    BigInt oneLess = bigIntCopy(rhs);
+    bigIntSub(&oneLess, u);
+
+    BigInt tmp = bigIntCopy(*lhs);
+
+    for (; bigIntIsSmaller(i, oneLess); bigIntAdd(&i, u)) {
+        bigIntMult(lhs, tmp);   
+    }
 }
 
 #endif
