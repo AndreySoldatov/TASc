@@ -177,6 +177,10 @@ void bigIntSub(BigInt *lhs, BigInt rhs) {
     }
 }
 
+void bigIntMult(BigInt * lhs, BigInt rhs) {
+    
+}
+
 void bigIntDelete(BigInt *b) {
     vecDelete_char(&b->data);
 }

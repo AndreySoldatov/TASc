@@ -85,6 +85,36 @@ VecName(T) TYPE_SUFFIX(vecSub_, T)(VecName(T) * v, size_t first, size_t last) { 
 void TYPE_SUFFIX(vecAppend_, T)(VecName(T) * lhs, VecName(T) rhs) { \
     for (size_t i = 0; i < rhs.length; i++) TYPE_SUFFIX(vecPush_, T)(lhs, rhs.data[i]); \
 } \
+void TYPE_SUFFIX(vecInsertOne_, T)(VecName(T) * v, T val, size_t index) { \
+    VecName(T) res = TYPE_SUFFIX(vecNew_, T)(); \
+    TYPE_SUFFIX(requestNewCap_, T)(&res, v->length + 1); \
+    VecName(T) ls = TYPE_SUFFIX(vecSub_, T)(v, 0, index); \
+    VecName(T) rs = TYPE_SUFFIX(vecSub_, T)(v, index, v->length); \
+    TYPE_SUFFIX(vecAppend_, T)(&res, ls); \
+    TYPE_SUFFIX(vecPush_, T)(&res, val); \
+    TYPE_SUFFIX(vecAppend_, T)(&res, rs); \
+    TYPE_SUFFIX(vecDelete_, T)(&ls); \
+    TYPE_SUFFIX(vecDelete_, T)(&rs); \
+    TYPE_SUFFIX(vecDelete_, T)(v); \
+    v->data = res.data; \
+    v->length = res.length; \
+    v->capacity = res.capacity; \
+} \
+void TYPE_SUFFIX(vecInsertSome_, T)(VecName(T) * v, VecName(T) rhs, size_t index) { \
+    VecName(T) res = TYPE_SUFFIX(vecNew_, T)(); \
+    TYPE_SUFFIX(requestNewCap_, T)(&res, v->length + rhs.length); \
+    VecName(T) ls = TYPE_SUFFIX(vecSub_, T)(v, 0, index); \
+    VecName(T) rs = TYPE_SUFFIX(vecSub_, T)(v, index, v->length); \
+    TYPE_SUFFIX(vecAppend_, T)(&res, ls); \
+    TYPE_SUFFIX(vecAppend_, T)(&res, rhs); \
+    TYPE_SUFFIX(vecAppend_, T)(&res, rs); \
+    TYPE_SUFFIX(vecDelete_, T)(&ls); \
+    TYPE_SUFFIX(vecDelete_, T)(&rs); \
+    TYPE_SUFFIX(vecDelete_, T)(v); \
+    v->data = res.data; \
+    v->length = res.length; \
+    v->capacity = res.capacity; \
+} \
 void TYPE_SUFFIX(vecEraseOne_, T)(VecName(T) * v, size_t index) { \
     VecName(T) res = TYPE_SUFFIX(vecNew_, T)(); \
     if(index >= v->length) {error_exit("vecEraseOne error: out of bounds\n")} \
