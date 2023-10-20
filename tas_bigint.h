@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "tas_vector.h"
 #include "tas_string.h"
@@ -78,8 +79,102 @@ void bigIntAdd(BigInt *lhs, BigInt rhs) {
     }
 }
 
-void bigIntSub(BigInt *lhs, BigInt rhs) {
+typedef enum BigIntRelation {
+    SMR,
+    EQL,
+    BGR
+} BigIntRelation;
+
+void bigIntRelPrint(BigIntRelation r) {
+    switch (r)
+    {
+    case BGR:
+        printf("BGR");
+        break;
+    case SMR:
+        printf("EQL");
+        break;
+    case EQL:
+        printf("EQL");
+        break;
     
+    default:
+        break;
+    }
+}
+
+Str bigIntRelToString(BigIntRelation r) {
+    Str s;
+    switch (r)
+    {
+    case BGR:
+        s = strNew("BGR");
+        break;
+    case SMR:
+        s = strNew("EQL");
+        break;
+    case EQL:
+        s = strNew("EQL");
+        break;
+    
+    default:
+        break;
+    }
+    return s;
+}
+
+BigIntRelation bigIntRel(BigInt lhs, BigInt rhs) {
+    if(lhs.data.length < rhs.data.length) {
+        return SMR;
+    } else if(lhs.data.length > rhs.data.length) {
+        return BGR;
+    } else {
+        for (int i = lhs.data.length - 1; i >= 0; i--) {
+            if(lhs.data.data[i] < rhs.data.data[i]) {
+                return SMR;
+            } else if(lhs.data.data[i] > rhs.data.data[i]) {
+                return BGR;
+            } else {
+                continue;
+            }
+        }
+        return EQL;
+    }
+}
+
+bool bigIntIsSmaller(BigInt lhs, BigInt rhs) {
+    return bigIntRel(lhs, rhs) == SMR;
+}
+
+bool bigIntIsEqual(BigInt lhs, BigInt rhs) {
+    return bigIntRel(lhs, rhs) == EQL;
+}
+
+bool bigIntIsBigger(BigInt lhs, BigInt rhs) {
+    return bigIntRel(lhs, rhs) == BGR;
+}
+
+void bigIntSub(BigInt *lhs, BigInt rhs) {
+    if(bigIntIsSmaller(*lhs, rhs)) {
+        error_exit("Error bigIntSub: Negative numbers are unsupported");
+    }
+
+    char debt = 0;
+    char diff = 0;
+    for (size_t i = 0; i < rhs.data.length; i++) {
+        diff = lhs->data.data[i] - rhs.data.data[i] - debt;
+        if(diff < 0) {
+            debt = 1;
+            diff += 10;
+        } else {
+            debt = 0;
+        }
+        lhs->data.data[i] = diff;
+    }
+
+    while(lhs->data.data[lhs->data.length - 1] == 0) {
+        vecPop_char(&lhs->data);
+    }
 }
 
 void bigIntDelete(BigInt *b) {
