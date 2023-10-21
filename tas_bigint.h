@@ -255,4 +255,50 @@ void bigIntPower(BigInt * lhs, BigInt rhs) {
     }
 }
 
+//I know that this is inefficient but fuck you bitch
+void bigIntTrimLeadingZeroes(BigInt * b) {
+    while(b->data.data[b->data.length - 1] == 0) {
+        vecPop_char(&b->data);
+    }
+}
+
+// I want to die
+
+void bigIntDiv(BigInt * lhs, BigInt rhs) {
+    if(lhs->data.length < rhs.data.length) { // Yo mama would love to choke on ma balls
+        bigIntDelete(lhs);
+        *lhs = bigIntFromString("0");
+        return;
+    }
+
+    int length = lhs->data.length - rhs.data.length + 1;
+    BigInt res = bigIntNew();
+    requestNewCap_char(&res.data, length);
+    
+    for (size_t i = 0; i < length; i++) {
+        vecPush_char(&res.data, 0);
+    }
+    
+    for (int i = length - 1; i >= 0; i--) {
+        BigInt tempMult = bigIntCopy(rhs);
+        bigIntMult(&tempMult, res);
+        while(bigIntIsSmaller(tempMult, *lhs) && res.data.data[i] <= 9) {
+            res.data.data[i]++;
+
+            bigIntDelete(&tempMult);
+            tempMult = bigIntCopy(rhs);
+            bigIntMult(&tempMult, res);
+        }
+        if(res.data.data[i] != 0 && bigIntRel(tempMult, *lhs) != EQL) res.data.data[i]--;
+        bigIntDelete(&tempMult);
+    }
+
+    bigIntTrimLeadingZeroes(&res);
+
+    bigIntDelete(lhs);
+    lhs->data.capacity = res.data.capacity;
+    lhs->data.length = res.data.length;
+    lhs->data.data = res.data.data;
+}
+
 #endif
