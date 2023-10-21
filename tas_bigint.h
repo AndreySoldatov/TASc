@@ -250,7 +250,7 @@ void bigIntPower(BigInt * lhs, BigInt rhs) {
 
     BigInt tmp = bigIntCopy(*lhs);
 
-    for (; bigIntIsSmaller(i, oneLess); bigIntAdd(&i, u)) {
+    for (; bigIntIsSmaller(i, oneLess); bigIntAdd(&i, u)) { // This was fucking painful
         bigIntMult(lhs, tmp);   
     }
 }
@@ -299,6 +299,79 @@ void bigIntDiv(BigInt * lhs, BigInt rhs) {
     lhs->data.capacity = res.data.capacity;
     lhs->data.length = res.data.length;
     lhs->data.data = res.data.data;
+}
+
+void bigIntMod(BigInt * lhs, BigInt rhs) {
+    BigInt divRes = bigIntCopy(*lhs);
+    bigIntDiv(&divRes, rhs);
+
+    bigIntMult(&divRes, rhs);
+    bigIntSub(lhs, divRes);
+
+    bigIntDelete(&divRes);
+}
+
+void bigIntAverage(BigInt * lhs, BigInt rhs) {
+    bigIntAdd(lhs, rhs);
+    BigInt two = bigIntFromString("2");
+    bigIntDiv(lhs, two);
+    bigIntDelete(&two);
+}
+
+void bigIntSqrt(BigInt * b) {
+    BigInt left = bigIntFromString("0");
+    BigInt right = bigIntCopy(*b);
+    bigIntAverage(&right, left);
+
+    BigInt middle = bigIntCopy(left);
+    bigIntAverage(&middle, right);
+
+    BigInt delta = bigIntCopy(right);
+    bigIntSub(&delta, left);
+
+    BigInt u = bigIntFromString("1");
+
+    while(bigIntIsBigger(delta, u)) {
+        BigInt middleSquare = bigIntCopy(middle);
+        bigIntMult(&middleSquare, middleSquare);
+        BigIntRelation rel = bigIntRel(middleSquare, *b);
+
+        switch (rel)
+        {
+        case BGR:
+            bigIntDelete(&right);
+            right = bigIntCopy(middle);
+            break;
+        case SMR:
+            bigIntDelete(&left);
+            left = bigIntCopy(middle);
+            break;
+        case EQL:
+            bigIntDelete(&middleSquare);
+            goto EXIT;
+        
+        default:
+            break;
+        }
+
+        bigIntDelete(&middle);
+        middle = bigIntCopy(right);
+        bigIntAverage(&middle, left);
+
+        bigIntDelete(&delta);
+        delta = bigIntCopy(right);
+        bigIntSub(&delta, left);
+    }
+
+    EXIT:
+    bigIntDelete(&left);
+    bigIntDelete(&right);
+    bigIntDelete(&delta);
+    bigIntDelete(&u);
+    bigIntDelete(b);
+    b->data.capacity = middle.data.capacity;
+    b->data.length = middle.data.length;
+    b->data.data = middle.data.data;
 }
 
 #endif

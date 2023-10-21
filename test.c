@@ -1,11 +1,9 @@
 #include "tas_bigint.h"
 
 int main() {
-    BigInt b = bigIntFromString("256");
-    BigInt b1 = bigIntFromString("7");
+    BigInt b = bigIntFromString("236266445788764534654345675467545355634476");
 
-    bigIntDiv(&b, b1);
+    bigIntSqrt(&b);
 
-    bigIntPrint(b); // 4154060304
-    printf("\n");
+    bigIntPrint(b);
 }
