@@ -96,6 +96,12 @@ void bigIntAdd(BigInt *lhs, BigInt rhs) {
     }
 }
 
+void bigIntAddInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntAdd(lhs, rhsB);
+    bigIntDelete(&rhsB);
+}
+
 typedef enum BigIntRelation {
     SMR,
     EQL,
@@ -193,9 +199,15 @@ void bigIntSub(BigInt *lhs, BigInt rhs) {
         lhs->data.data[i] = diff;
     }
 
-    while(lhs->data.data[lhs->data.length - 1] == 0) {
+    while(lhs->data.data[lhs->data.length - 1] == 0 && lhs->data.length > 1) {
         vecPop_char(&lhs->data);
     }
+}
+
+void bigIntSubInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntSub(lhs, rhsB);
+    bigIntDelete(&rhsB);
 }
 
 void bigIntMultD(BigInt *lhs, char rhs) {
@@ -242,6 +254,12 @@ void bigIntMult(BigInt * lhs, BigInt rhs) {
     lhs->data.data = res.data.data;
 }
 
+void bigIntMultInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntMult(lhs, rhsB);
+    bigIntDelete(&rhsB);
+}
+
 void bigIntPower(BigInt * lhs, BigInt rhs) {
     BigInt i = bigIntFromString("0");
     BigInt u = bigIntFromString("1");
@@ -251,13 +269,19 @@ void bigIntPower(BigInt * lhs, BigInt rhs) {
     BigInt tmp = bigIntCopy(*lhs);
 
     for (; bigIntIsSmaller(i, oneLess); bigIntAdd(&i, u)) { // This was fucking painful
-        bigIntMult(lhs, tmp);   
+        bigIntMult(lhs, tmp);
     }
+}
+
+void bigIntPowerInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntPower(lhs, rhsB);
+    bigIntDelete(&rhsB);
 }
 
 //I know that this is inefficient but fuck you bitch
 void bigIntTrimLeadingZeroes(BigInt * b) {
-    while(b->data.data[b->data.length - 1] == 0) {
+    while(b->data.data[b->data.length - 1] == 0 && b->data.length > 1) {
         vecPop_char(&b->data);
     }
 }
@@ -301,6 +325,12 @@ void bigIntDiv(BigInt * lhs, BigInt rhs) {
     lhs->data.data = res.data.data;
 }
 
+void bigIntDivInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntDiv(lhs, rhsB);
+    bigIntDelete(&rhsB);
+}
+
 void bigIntMod(BigInt * lhs, BigInt rhs) {
     BigInt divRes = bigIntCopy(*lhs);
     bigIntDiv(&divRes, rhs);
@@ -311,11 +341,23 @@ void bigIntMod(BigInt * lhs, BigInt rhs) {
     bigIntDelete(&divRes);
 }
 
+void bigIntModInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntMod(lhs, rhsB);
+    bigIntDelete(&rhsB);
+}
+
 void bigIntAverage(BigInt * lhs, BigInt rhs) {
     bigIntAdd(lhs, rhs);
     BigInt two = bigIntFromString("2");
     bigIntDiv(lhs, two);
     bigIntDelete(&two);
+}
+
+void bigIntAverageInt(BigInt * lhs, int rhs) {
+    BigInt rhsB = bigIntFromInt(rhs);
+    bigIntAverage(lhs, rhsB);
+    bigIntDelete(&rhsB);
 }
 
 void bigIntSqrt(BigInt * b) {
@@ -372,6 +414,68 @@ void bigIntSqrt(BigInt * b) {
     b->data.capacity = middle.data.capacity;
     b->data.length = middle.data.length;
     b->data.data = middle.data.data;
+}
+
+bool bigIntIsPrime(BigInt b) {
+    if(b.data.data[0] % 2 == 0 || b.data.data[0] == 0) return false;
+
+    BigInt sqrt = bigIntCopy(b);
+    bigIntSqrt(&sqrt);
+    BigInt u = bigIntFromString("1");
+    bigIntAdd(&sqrt, u);
+
+    BigInt zero = bigIntFromString("0");
+
+    BigInt i;
+    BigInt mod;
+
+    bigIntAddInt(&u, 1);
+
+    for (i = bigIntFromString("3"); bigIntRel(i, sqrt) == SMR; bigIntAdd(&i, u)) {
+        mod = bigIntCopy(b);
+        bigIntMod(&mod, i);
+        if(bigIntIsEqual(mod, zero)) {
+            bigIntDelete(&sqrt);
+            bigIntDelete(&u);
+            bigIntDelete(&zero);
+            bigIntDelete(&i);
+            bigIntDelete(&mod);
+            return false;
+        }
+        bigIntDelete(&mod);
+    }
+
+    bigIntDelete(&mod);
+    bigIntDelete(&sqrt);
+    bigIntDelete(&u);
+    bigIntDelete(&zero);
+    bigIntDelete(&i);
+    return true;
+}
+
+void bigIntRand(BigInt * seed, BigInt max) {
+    BigInt mult = bigIntCopy(max);
+    bigIntAddInt(&mult, rand());
+
+    BigInt inc = bigIntCopy(max);
+    bigIntAddInt(&inc, rand());
+
+    bigIntMult(seed, mult);
+    bigIntAdd(seed, inc);
+    bigIntMod(seed, max);
+    
+    bigIntDelete(&mult);
+    bigIntDelete(&inc);
+}
+
+void bigIntRandRange(BigInt * seed, BigInt min, BigInt max) {
+    BigInt delta = bigIntCopy(max);
+    bigIntSub(&delta, min);
+
+    bigIntRand(seed, delta);
+    bigIntAdd(seed, min);
+
+    bigIntDelete(&delta);
 }
 
 #endif
